@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('participants', function (Blueprint $table) {
-            $table->id();
-            $table->string('names');
-            $table->string('last_name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->foreignId('event_id')->nullable()->constrained()->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->string('names')->index();
+            $table->string('last_name')->nullable()->index();
+            $table->string('email')->nullable()->index();
+            $table->string('phone')->nullable()->index();
             $table->foreignId('ubigeo_id')->nullable()->constrained()->onDelete('cascade');
-            $table->boolean('adhered')->nullable()->default(0);
+            $table->string('status')->nullable();
 
             $table->timestamps();
         });

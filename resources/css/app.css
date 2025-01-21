@@ -5,3 +5,39 @@
 [x-cloak] {
     display: none;
 }
+
+.card{
+    @apply p-6 lg:p-8 bg-white border-b border-gray-200;
+}
+
+/* Estilo para la tabla */
+.table {
+    @apply min-w-full bg-white border border-gray-300 rounded-lg shadow;
+}
+
+/* Estilo para el encabezado */
+.table thead {
+    @apply bg-blue-600 text-white;
+}
+.table th {
+    @apply px-4 py-3 text-left text-sm font-semibold uppercase;
+}
+
+/* Estilo para las filas */
+.table tbody tr {
+    @apply border-b border-gray-200 hover:bg-gray-50;
+}
+
+/* Estilo para las celdas */
+.table td {
+    @apply px-4 py-2 text-sm text-gray-700;
+}
+
+/* Agregar espacio entre las filas */
+.table tbody tr:last-child {
+    @apply border-none;
+}
+
+.form-select {
+    @apply block w-full px-4 py-2 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-blue-500 sm:text-sm;
+}
