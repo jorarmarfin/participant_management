@@ -80,6 +80,7 @@
             <div>
                 <x-label for="typeForm" value="{{ __('Type Form') }}" />
                 <select id="typeForm" wire:model="type" class="block mt-1 w-full">
+                    <option value="">Seleccione un tipo</option>
                     @foreach($typeForm as $item)
                         <option value="{{ $item }}">{{ $item }}</option>
                     @endforeach
