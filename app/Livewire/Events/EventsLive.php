@@ -46,6 +46,7 @@ class EventsLive extends Component
         $this->start_date = $this->event->start_date;
         $this->openModal = true;
         $this->isEdit = true;
+        $this->type = $this->event->type;
     }
     public function delete($id):void
     {
