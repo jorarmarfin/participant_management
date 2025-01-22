@@ -19,7 +19,7 @@
                 <tbody>
                 @foreach ($participants as $participant)
                     <tr>
-                        <td>{{ $participant->id }}</td>
+                        <td>{{ $loop->index +1  }}</td>
                         <td>{{ $participant->names }}</td>
                         <td>{{ $participant->last_name }}</td>
                         <td>{{ $participant->email }}</td>

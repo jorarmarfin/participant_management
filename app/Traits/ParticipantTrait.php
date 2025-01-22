@@ -22,9 +22,13 @@ trait ParticipantTrait
     {
         return Participant::where($field,$value)->first();
     }
-    public function setParticipantInEvent($participant,$event_id)
+    public function setParticipantInEvent($participant,$event_id):void
     {
         $participant->events()->syncWithoutDetaching($event_id);
+    }
+    public function isContact()
+    {
+
     }
 
 }

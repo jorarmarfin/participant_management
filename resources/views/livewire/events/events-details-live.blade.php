@@ -11,6 +11,9 @@
                     <th>ID</th>
                     <th>Nombres</th>
                     <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th>Estatus</th>
                     <th>Acciones</th>
 
 
@@ -22,8 +25,12 @@
                         <td>{{ $loop->index + 1 }}</td>
                         <td>{{ $participant->names }}</td>
                         <td>{{ $participant->last_name }}</td>
+                        <td>{{ $participant->phone }}</td>
+                        <td>{{ $participant->email }}</td>
+                        <td>{{ $participant->status }}</td>
                         <td>
-                           acciones
+                            <x-primary-button wire:click="contact('{{ $participant->id }}')" class="btn btn-primary">Contacto</x-primary-button>
+
                         </td>
                     </tr>
                 @endforeach
