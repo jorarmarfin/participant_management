@@ -17,5 +17,13 @@ trait DropDownListTrait
             'Tengo hijos mayores de edad',
         ];
     }
+    public function DDLTypeForm(): array
+    {
+        return [
+            'web',
+            'formation',
+        ];
+    }
+
 
 }

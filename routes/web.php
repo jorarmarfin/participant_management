@@ -32,17 +32,13 @@ Route::middleware([
 
 });
 
-Route::get('/form/{event_id}', function () {
+Route::get('/form/{type}/{event_id}', function () {
     return view('form.form-web', [
-        'event_id' => request()->event_id
+        'event_id' => request()->event_id,
+        'type' => request()->type
     ]);
 })->name('form.web');
 
-Route::get('/form-formation/{event_id}', function () {
-    return view('form.form-formation', [
-        'event_id' => request()->event_id
-    ]);
-})->name('form.web');
 
 
 

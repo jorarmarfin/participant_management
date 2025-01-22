@@ -3,13 +3,14 @@
 namespace App\Livewire\Events;
 
 use App\Models\Event;
+use App\Traits\DropDownListTrait;
 use App\Traits\EventsTrait;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class EventsLive extends Component
 {
-    use EventsTrait, WithPagination;
+    use EventsTrait, WithPagination, DropDownListTrait;
     public bool $openModal = false;
     public bool $openModalDelete = false;
     public bool $isEdit = false;
@@ -17,12 +18,14 @@ class EventsLive extends Component
     public string $imagen='';
     public string $start_date='';
     public string $id='';
+    public string $type='';
     public Event $event;
 
     public function render()
     {
         return view('livewire.events.events-live',[
-            'events' => $this->getEvents()->paginate(50)
+            'events' => $this->getEvents()->paginate(50),
+            'typeForm' => $this->DDLTypeForm()
         ]);
     }
     public function store():void
@@ -30,7 +33,8 @@ class EventsLive extends Component
         $this->storeEvent([
             'name' => $this->name,
             'imagen' => $this->imagen,
-            'start_date' => $this->start_date
+            'start_date' => $this->start_date,
+            'type' => $this->type
         ]);
         $this->openModal = false;
     }

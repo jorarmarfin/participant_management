@@ -27,7 +27,7 @@
                             <img src="{{ $event->imagen }}" alt="{{ $event->name }}" class="w-20 h-20">
                         </td>
                         <td>
-                            <a href="{{ route('form.web', $event->id) }}" target="_blank" class=" underline text-blue-700 ">
+                            <a href="{{ route('form.web', [$event->type,$event->id]) }}" target="_blank" class=" underline text-blue-700 ">
                                 Ver formulario
                             </a>
                         </td>
@@ -76,6 +76,15 @@
                 <x-label for="date" value="{{ __('Fecha') }}" />
                 <x-input id="date" class="block mt-1 w-full" type="date" wire:model="start_date" required autofocus />
                 <x-input-error for="date" class="mt-2" />
+            </div>
+            <div>
+                <x-label for="typeForm" value="{{ __('Type Form') }}" />
+                <select id="typeForm" wire:model="type" class="block mt-1 w-full">
+                    @foreach($typeForm as $item)
+                        <option value="{{ $item }}">{{ $item }}</option>
+                    @endforeach
+                </select>
+                <x-input-error for="typeForm" class="mt-2" />
             </div>
 
         </div>
