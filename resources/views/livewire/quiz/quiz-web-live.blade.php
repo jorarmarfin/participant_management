@@ -17,17 +17,18 @@
                     <input type="email" id="email" name="email" wire:model.blur="email"
                            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                            placeholder="Ingresa tu correo electrónico" required>
+{{--                    @error('form.email')--}}
+{{--                    <div class="bg-red-300 rounded p-2 m-2">--}}
+{{--                        <span class="font-bold">{{ $message }}</span>--}}
+{{--                    </div>--}}
+{{--                    @enderror--}}
                 </div>
 {{--                <div x-data x-init="Inputmask({ alias: 'email' }).mask($refs.emailInput)">--}}
 {{--                    <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>--}}
 {{--                    <input type="text" id="email" wire:model.live="form.email" x-ref="emailInput"--}}
 {{--                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"--}}
 {{--                           placeholder="correo@ejemplo.com" required>--}}
-{{--                    @error('form.email')--}}
-{{--                    <div class="bg-red-300 rounded p-2 m-2">--}}
-{{--                        <span class="font-bold">{{ $message }}</span>--}}
-{{--                    </div>--}}
-{{--                    @enderror--}}
+
 {{--                </div>--}}
 
                 <!-- Campo Nombres -->
