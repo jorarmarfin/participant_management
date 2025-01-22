@@ -42,7 +42,7 @@ class QuizWebLive extends Component
     }
     public function save()
     {
-        $this->form->status = ParticipantStatus::New->value;
+        $this->form->status = ParticipantStatus::NewWeb->value;
         $this->form->ubigeo_id = $this->distrito;
         $this->validate();
 
