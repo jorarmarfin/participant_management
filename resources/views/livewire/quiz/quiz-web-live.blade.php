@@ -52,7 +52,7 @@
 
                 <!-- Campo Ubigeo -->
                 <div>
-                    <label for="apellidos" class="block text-gray-700 font-medium mb-2">Ubigeo</label>
+                    <label for="apellidos" class="block text-gray-700 font-medium mb-2">¿Donde vives? Dpto./Prov./Distrito</label>
                     <div class=" mt-2">
                         <select wire:model.live="departamento" class="form-select" name="departamento" id="departamento">
                             <option value="">Seleccionar Departamento</option>
