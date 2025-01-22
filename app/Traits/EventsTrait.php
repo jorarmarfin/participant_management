@@ -9,7 +9,7 @@ trait EventsTrait
 {
     public function getEvents(): \Illuminate\Database\Eloquent\Builder
     {
-        return Event::query();
+        return Event::orderBy('id','desc');
     }
     public function storeEvent(array $data): void
     {
@@ -26,7 +26,7 @@ trait EventsTrait
     public function getParticipantsByEvent($event_id)
     {
         $event = Event::find($event_id);
-        return Participant::whereIn('id', $event->participants->pluck('id')->toArray());
+        return Participant::orderBy('id','desc')->whereIn('id', $event->participants->pluck('id')->toArray());
     }
 
 }

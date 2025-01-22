@@ -3,20 +3,19 @@
 namespace App\Livewire\Quiz;
 
 use App\Enums\ParticipantStatus;
-use App\Livewire\Forms\ParticipantsForm;
-use App\Models\Participant;
+use App\Livewire\Forms\ParticipantsFormationForm;
 use App\Traits\DropDownListTrait;
 use App\Traits\EventsTrait;
 use App\Traits\ParticipantTrait;
 use App\Traits\UbigeoTrait;
 use Livewire\Component;
 
-class QuizWebLive extends Component
+class QuizFormationLive extends Component
 {
     use UbigeoTrait,EventsTrait,ParticipantTrait,DropDownListTrait;
     public string $event_id,$departamento = '',$provincia = '',$imagen = '';
     public $distrito;
-    public ParticipantsForm $form;
+    public ParticipantsFormationForm $form;
     public bool $submitted = false;
     public function render()
     {
@@ -28,7 +27,7 @@ class QuizWebLive extends Component
             }
         }
 
-        return view('livewire.quiz.quiz-web-live',[
+        return view('livewire.quiz.quiz-formation-live',[
             'departamentos' => $this->getDDLDepartamento(),
             'provincias' => $this->getDDLProvincia($this->departamento),
             'distritos' => $this->getDDLDistrito($this->provincia),

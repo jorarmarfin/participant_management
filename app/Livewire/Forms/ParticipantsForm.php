@@ -23,6 +23,12 @@ class ParticipantsForm extends Form
     #[Validate('required')]
     public int $ubigeo_id = 0;
 
+    #[Validate('required')]
+    public string $educational_institution_type = '';
+
+    #[Validate('required')]
+    public bool $policy = false;
+
     public string $status = '';
 
 

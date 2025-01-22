@@ -6,7 +6,7 @@ use App\Models\Participant;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-class ParticipantsForm extends Form
+class ParticipantsFormationForm extends Form
 {
     #[Validate('required')]
     public string $names = '';
@@ -22,12 +22,6 @@ class ParticipantsForm extends Form
 
     #[Validate('required')]
     public int $ubigeo_id = 0;
-
-    #[Validate('required')]
-    public string $educational_institution_type = '';
-
-    #[Validate('required')]
-    public bool $policy = false;
 
     public string $status = '';
 

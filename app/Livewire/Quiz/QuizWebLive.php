@@ -5,6 +5,7 @@ namespace App\Livewire\Quiz;
 use App\Enums\ParticipantStatus;
 use App\Livewire\Forms\ParticipantsForm;
 use App\Models\Participant;
+use App\Traits\DropDownListTrait;
 use App\Traits\EventsTrait;
 use App\Traits\ParticipantTrait;
 use App\Traits\UbigeoTrait;
@@ -12,15 +13,15 @@ use Livewire\Component;
 
 class QuizWebLive extends Component
 {
-    use UbigeoTrait,EventsTrait,ParticipantTrait;
-    public string $event_id,$departamento = '',$provincia = '',$imagen = '',$email = '';
+    use UbigeoTrait,EventsTrait,ParticipantTrait,DropDownListTrait;
+    public string $event_id,$departamento = '',$provincia = '',$imagen = '';
     public $distrito;
     public ParticipantsForm $form;
     public bool $submitted = false;
     public function render()
     {
-        if($this->email){
-            $participant = $this->getParticipantByField('email',$this->email);
+        if($this->form->email){
+            $participant = $this->getParticipantByField('email',$this->form->email);
             if ($participant) {
                 $this->setParticipantInEvent($participant,$this->event_id);
                 $this->submitted = true;
@@ -31,6 +32,7 @@ class QuizWebLive extends Component
             'departamentos' => $this->getDDLDepartamento(),
             'provincias' => $this->getDDLProvincia($this->departamento),
             'distritos' => $this->getDDLDistrito($this->provincia),
+            'types' => $this->DDLInstitutionType()
         ]);
     }
     public function mount($event_id)
@@ -42,7 +44,7 @@ class QuizWebLive extends Component
     {
         $this->form->status = ParticipantStatus::New->value;
         $this->form->ubigeo_id = $this->distrito;
-//        $this->validate();
+        $this->validate();
 
         $this->storeParticipant($this->form->all(),$this->event_id);
 

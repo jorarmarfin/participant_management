@@ -38,4 +38,13 @@ Route::get('/form/{event_id}', function () {
     ]);
 })->name('form.web');
 
+Route::get('/form-formation/{event_id}', function () {
+    return view('form.form-formation', [
+        'event_id' => request()->event_id
+    ]);
+})->name('form.web');
+
+
+
+
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);

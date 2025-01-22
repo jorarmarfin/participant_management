@@ -86,7 +86,7 @@
 
                 <!-- Campo Teléfono -->
                 <div x-data x-init="Inputmask({'mask': '999-999-999'}).mask($refs.phoneInput)">
-                    <label for="phone" class="block text-gray-700 font-medium mb-2">Teléfono</label>
+                    <label for="phone" class="block text-gray-700 font-medium mb-2">Teléfono celular</label>
                     <input type="text" id="phone" wire:model.defer="form.phone" x-ref="phoneInput"
                            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                            placeholder="000-000-000" required>
@@ -96,40 +96,6 @@
                         </div>
                     @enderror
                 </div>
-                <div>
-                    <label for="type" class="block text-gray-700 font-medium mb-2">Tipo de Institución Educativa de sus hijos</label>
-                    <select wire:model="form.educational_institution_type" id="type" name="type"
-                            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                            required>
-                        <option value="">Seleccionar Tipo de Institución Educativa</option>
-                        @foreach($types as $type)
-                            <option value="{{$type}}">{{$type}}</option>
-                        @endforeach
-                    </select>
-                    @error('form.educational_institution_type')
-                        <div class="bg-red-300 rounded p-2 m-2">
-                            <span class="font-bold">{{ $message }}</span>
-                        </div>
-                    @enderror
-                </div>
-                <!-- Checkbox for Privacy Policy -->
-                <div>
-                    <div class="mt-2 mb-2">
-                        <a class="text-2xl underline text-blue-700" target="_blank"
-                           href="https://drive.google.com/file/d/1Zarl7TKx5A4zVwC7hNWHanZuzHrwhnPr/view">Política de privacidad</a>
-                    </div>
-
-                    <label for="policy" class="flex items-center">
-                        <input type="checkbox" id="policy" wire:model="form.policy" class="form-checkbox">
-                        <span class="ml-2 text-gray-700">He leído y acepto la política de privacidad</span>
-                    </label>
-                    @error('form.policy')
-                        <div class="bg-red-300 rounded p-2 m-2">
-                            <span class="font-bold">{{ $message }}</span>
-                        </div>
-                    @enderror
-                </div>
-
                 <!-- Botón Enviar -->
                 <div class="text-center">
                     <button type="submit"
