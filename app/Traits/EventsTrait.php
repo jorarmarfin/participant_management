@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Event;
 use App\Models\Participant;
+use Carbon\Carbon;
 
 trait EventsTrait
 {
@@ -27,6 +28,17 @@ trait EventsTrait
     {
         $event = Event::find($event_id);
         return Participant::orderBy('id','desc')->whereIn('id', $event->participants->pluck('id')->toArray());
+    }
+    public function getMessageToSend($fecha): string
+    {
+        Carbon::setLocale('es'); // Asegurar idioma español
+
+        $fechaCarbon = Carbon::parse($fecha);
+
+        return sprintf(
+            'El enlace te llegará el %s por la mañana',
+            $fechaCarbon->translatedFormat('j \d\e F')
+        );
     }
 
 }

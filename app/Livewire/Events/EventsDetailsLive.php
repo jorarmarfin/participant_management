@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Events;
 
+use App\Enums\ParticipantStatus;
 use App\Traits\EventsTrait;
 use App\Traits\ParticipantTrait;
 use Livewire\Component;
@@ -21,9 +22,8 @@ class EventsDetailsLive extends Component
     {
         $this->event_id = $event_id;
     }
-    public function contact($participant_id)
+    public function contact($participant_id,$phone):void
     {
-        $this->isContact($participant_id);
-
+        $this->isMyContact($participant_id,$phone);
     }
 }

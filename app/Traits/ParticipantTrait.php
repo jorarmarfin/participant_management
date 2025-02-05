@@ -2,7 +2,9 @@
 
 namespace App\Traits;
 
+use App\Enums\ParticipantStatus;
 use App\Models\Participant;
+use App\Services\WaveConnectedService;
 
 trait ParticipantTrait
 {
@@ -26,9 +28,16 @@ trait ParticipantTrait
     {
         $participant->events()->syncWithoutDetaching($event_id);
     }
-    public function isContact()
+    public function isMyContact($participant_id,$phone):void
     {
-
+        $instance = env('WAVECONNECTED_INSTANCE');
+        $contact = (new WaveConnectedService)->getContactById($instance,$phone);
+        if($contact['data']['data']['isMyContact']){
+            $participant = Participant::find($participant_id);
+            $participant->status = ParticipantStatus::Attached;
+            $participant->save();
+        }
     }
+
 
 }

@@ -29,8 +29,7 @@
                         <td>{{ $participant->email }}</td>
                         <td>{{ $participant->status }}</td>
                         <td>
-                            <x-primary-button wire:click="contact('{{ $participant->id }}')" class="btn btn-primary">Contacto</x-primary-button>
-
+                            <x-primary-button wire:click="contact('{{ $participant->id }}','{{$participant->phone}}')" class="btn btn-primary">Contacto</x-primary-button>
                         </td>
                     </tr>
                 @endforeach

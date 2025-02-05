@@ -31,5 +31,11 @@ class ParticipantsForm extends Form
 
     public string $status = '';
 
+    public function updatedPhone($value)
+    {
+        // Limpia el valor eliminando caracteres no numéricos
+        $this->phone = preg_replace('/[^0-9]/', '', $value);
+    }
+
 
 }

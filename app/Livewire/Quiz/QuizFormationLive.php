@@ -13,7 +13,7 @@ use Livewire\Component;
 class QuizFormationLive extends Component
 {
     use UbigeoTrait,EventsTrait,ParticipantTrait,DropDownListTrait;
-    public string $event_id,$departamento = '',$provincia = '',$imagen = '';
+    public string $event_id,$departamento = '',$provincia = '',$imagen = '', $start_date = '';
     public $distrito;
     public ParticipantsFormationForm $form;
     public bool $submitted = false;
@@ -31,12 +31,14 @@ class QuizFormationLive extends Component
             'departamentos' => $this->getDDLDepartamento(),
             'provincias' => $this->getDDLProvincia($this->departamento),
             'distritos' => $this->getDDLDistrito($this->provincia),
-            'types' => $this->DDLInstitutionType()
+            'types' => $this->DDLInstitutionType(),
         ]);
     }
     public function mount($event_id)
     {
         $this->event_id = $event_id;
+        $event = $this->getEventById($event_id);
+        $this->start_date = $this->getMessageToSend($event->start_date);
         $this->imagen = $this->getImagenEvent($event_id);
     }
     public function save()
