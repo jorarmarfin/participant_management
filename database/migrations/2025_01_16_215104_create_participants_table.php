@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('last_name')->nullable()->index();
             $table->string('email')->nullable()->index();
             $table->string('phone')->nullable()->index();
+            $table->string('country')->nullable();
             $table->foreignId('ubigeo_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('status')->nullable();
             $table->string('educational_institution_type')->nullable();

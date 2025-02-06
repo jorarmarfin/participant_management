@@ -29,6 +29,7 @@ class QuizWebLive extends Component
         }
 
         return view('livewire.quiz.quiz-web-live',[
+            'countries' => $this->getDDLCountries(),
             'departamentos' => $this->getDDLDepartamento(),
             'provincias' => $this->getDDLProvincia($this->departamento),
             'distritos' => $this->getDDLDistrito($this->provincia),
@@ -42,8 +43,23 @@ class QuizWebLive extends Component
     }
     public function save()
     {
+        if($this->form->country=='Perú'){
+            $this->validate([
+                'departamento' => 'required',
+                'provincia' => 'required',
+                'distrito' => 'required',
+            ],[
+                'departamento.required' => 'El campo departamento es obligatorio',
+                'provincia.required' => 'El campo provincia es obligatorio',
+                'distrito.required' => 'El campo distrito es obligatorio',
+            ]);
+
+            $this->form->ubigeo_id = $this->distrito;
+        }
+        else{
+            $this->form->ubigeo_id = null;
+        }
         $this->form->status = ParticipantStatus::NewWeb->value;
-        $this->form->ubigeo_id = $this->distrito;
         $this->validate();
 
         $this->storeParticipant($this->form->all(),$this->event_id);

@@ -21,7 +21,9 @@ class ParticipantsForm extends Form
     public string $phone = '';
 
     #[Validate('required')]
-    public int $ubigeo_id = 0;
+    public string $country = 'Perú';
+
+    public $ubigeo_id;
 
     #[Validate('required')]
     public string $educational_institution_type = '';

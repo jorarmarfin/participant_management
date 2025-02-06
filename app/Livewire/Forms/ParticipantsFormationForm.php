@@ -2,11 +2,12 @@
 
 namespace App\Livewire\Forms;
 
+use AllowDynamicProperties;
 use App\Models\Participant;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-class ParticipantsFormationForm extends Form
+#[AllowDynamicProperties] class ParticipantsFormationForm extends Form
 {
     #[Validate('required')]
     public string $names = '';
@@ -21,9 +22,11 @@ class ParticipantsFormationForm extends Form
     public string $phone = '';
 
     #[Validate('required')]
-    public int $ubigeo_id = 0;
+    public string $country = 'Perú';
 
     public string $status = '';
+
+    public $ubigeo_id;
 
 
 }

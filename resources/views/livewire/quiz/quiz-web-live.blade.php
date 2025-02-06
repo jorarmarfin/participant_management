@@ -52,6 +52,15 @@
 
                 <!-- Campo Ubigeo -->
                 <div>
+                    <label for="pais" class="block text-gray-700 font-medium mb-2">País </label>
+                    <div class="mt-2">
+                        <select wire:model.live="form.country" class="form-select" name="pais" id="pais">
+                            <option value="">Seleccionar País</option>
+                            @foreach($countries as $country)
+                                <option value="{{$country}}">{{$country}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <label for="apellidos" class="block text-gray-700 font-medium mb-2">¿Donde vives? Dpto./Prov./Distrito</label>
                     <div class=" mt-2">
                         <select wire:model.live="departamento" class="form-select" name="departamento" id="departamento">
@@ -60,6 +69,11 @@
                                 <option value="{{$departamento}}">{{$departamento}}</option>
                             @endforeach
                         </select>
+                        @error('departamento')
+                        <div class="bg-red-300 rounded p-2 m-2">
+                            <span class="font-bold">{{ $message }}</span>
+                        </div>
+                        @enderror
                     </div>
                     <div class=" mt-2">
                         <select wire:model.live="provincia" class="form-select" name="provincia" id="provincia">
@@ -68,6 +82,11 @@
                                 <option value="{{$provincia}}">{{$provincia}}</option>
                             @endforeach
                         </select>
+                        @error('provincia')
+                        <div class="bg-red-300 rounded p-2 m-2">
+                            <span class="font-bold">{{ $message }}</span>
+                        </div>
+                        @enderror
                     </div>
                     <div class=" mt-2">
                         <select wire:model.live="distrito" class="form-select" name="distrito" id="distrito">

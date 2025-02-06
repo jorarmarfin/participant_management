@@ -17,13 +17,19 @@ class Participant extends Model
     protected function Names(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => strtoupper($value),
+            set: fn (string $value) => mb_strtoupper($value),
         );
     }
     protected function lastName():Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => strtoupper($value),
+            set: fn (string $value) => mb_strtoupper($value),
+        );
+    }
+    protected function country():Attribute
+    {
+        return Attribute::make(
+            set: fn (string $value) => mb_strtoupper($value),
         );
     }
     protected function phone():Attribute

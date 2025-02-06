@@ -8,12 +8,13 @@ use App\Traits\DropDownListTrait;
 use App\Traits\EventsTrait;
 use App\Traits\ParticipantTrait;
 use App\Traits\UbigeoTrait;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
 class QuizFormationLive extends Component
 {
     use UbigeoTrait,EventsTrait,ParticipantTrait,DropDownListTrait;
-    public string $event_id,$departamento = '',$provincia = '',$imagen = '', $start_date = '';
+    public string $event_id,  $departamento = '',$provincia = '',$imagen = '', $start_date = '';
     public $distrito;
     public ParticipantsFormationForm $form;
     public bool $submitted = false;
@@ -28,6 +29,7 @@ class QuizFormationLive extends Component
         }
 
         return view('livewire.quiz.quiz-formation-live',[
+            'countries' => $this->getDDLCountries(),
             'departamentos' => $this->getDDLDepartamento(),
             'provincias' => $this->getDDLProvincia($this->departamento),
             'distritos' => $this->getDDLDistrito($this->provincia),
@@ -41,11 +43,30 @@ class QuizFormationLive extends Component
         $this->start_date = $this->getMessageToSend($event->start_date);
         $this->imagen = $this->getImagenEvent($event_id);
     }
+
+    /**
+     * @throws ValidationException
+     */
     public function save()
     {
+        if($this->form->country=='Perú'){
+            $this->validate([
+                'departamento' => 'required',
+                'provincia' => 'required',
+                'distrito' => 'required',
+            ],[
+                'departamento.required' => 'El campo departamento es obligatorio',
+                'provincia.required' => 'El campo provincia es obligatorio',
+                'distrito.required' => 'El campo distrito es obligatorio',
+            ]);
+
+            $this->form->ubigeo_id = $this->distrito;
+        }
+        else{
+            $this->form->ubigeo_id = null;
+        }
+
         $this->form->status = ParticipantStatus::New->value;
-        $this->form->ubigeo_id = $this->distrito;
-        $this->validate();
 
         $this->storeParticipant($this->form->all(),$this->event_id);
 
