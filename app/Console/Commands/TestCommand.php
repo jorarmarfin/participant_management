@@ -27,6 +27,7 @@ class TestCommand extends Command
     public function handle()
     {
         $instance = env('WAVECONNECTED_INSTANCE');
+        $this->info('Instance: '.$instance);
         $phone = '992949424';
         $contact = (new WaveConnectedService)->getContactById($instance,$phone);
         $this->info(json_encode($contact));
