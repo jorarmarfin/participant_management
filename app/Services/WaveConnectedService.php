@@ -17,6 +17,7 @@ class WaveConnectedService
             ];
             // Realizar la solicitud HTTP
             $uri = env('WAVECONNECTED_URL').'/api';
+            dd($method, $uri . $url, $options);
             $response = $client->request($method, $uri . $url, $options);
             // Decodificar la respuesta JSON a un array de PHP
             return json_decode($response->getBody(), true);
