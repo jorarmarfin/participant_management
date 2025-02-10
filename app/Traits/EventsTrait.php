@@ -40,5 +40,24 @@ trait EventsTrait
             $fechaCarbon->translatedFormat('j \d\e F')
         );
     }
+    public function getQueryParticipantsByEvent($event_id)
+    {
+        return Participant::orderBy('id','desc')
+            ->join('event_participant', 'participants.id', '=', 'event_participant.participant_id')
+            ->join('ubigeos as d', 'participants.ubigeo_id', '=', 'd.id')
+            ->join('events as e', 'event_participant.event_id', '=', 'e.id')
+            ->where('e.id', $event_id)
+            ->select('participants.id',
+                'participants.names',
+                'participants.last_name',
+                'participants.email',
+                'participants.phone',
+                'd.departamento',
+                'd.provincia',
+                'd.distrito',
+                'e.name as evento',
+                'participants.status'
+            );
+    }
 
 }
