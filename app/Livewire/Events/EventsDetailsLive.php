@@ -15,7 +15,7 @@ class EventsDetailsLive extends Component
     public function render()
     {
         return view('livewire.events.events-details-live',[
-            'participants' => $this->getParticipantsByEvent($this->event_id)->paginate(10)
+            'participants' => $this->getParticipantsByEvent($this->event_id)->paginate(50)
         ]);
     }
     public function mount($event_id):void

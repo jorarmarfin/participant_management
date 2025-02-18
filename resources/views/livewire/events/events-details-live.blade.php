@@ -41,7 +41,7 @@
 
 
         <!-- Controles de paginación -->
-{{--        {{ $participants->links() }}--}}
+        {{ $participants->links() }}
     </div>
 
 </div>
