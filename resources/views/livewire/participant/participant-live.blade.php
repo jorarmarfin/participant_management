@@ -25,7 +25,7 @@
                         <td>{{ $participant->email }}</td>
                         <td>{{ $participant->phone }}</td>
                         <td>{{ $participant->status }}</td>
-                        <td>{{ $participant?->ubigeo->description }}</td>
+                        <td>{{ $participant?->ubigeo?->description }}</td>
                     </tr>
                 @endforeach
                 </tbody>
