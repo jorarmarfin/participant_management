@@ -23,7 +23,7 @@
                 <tbody>
                 @foreach ($participants as $participant)
                     <tr>
-                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ $loop->iteration + $participant->firstItem() - 1 }}</td>
                         <td>{{ $participant->names }}</td>
                         <td>{{ $participant->last_name }}</td>
                         <td>{{ $participant->phone }}</td>
