@@ -1,7 +1,7 @@
 <div>
     <div class="card">
         <div class="card-header flex flex-1 justify-between items-center">
-            <h1 class="text-3xl">Cantidad de participantes: {{$participants->count()}}</h1>
+            <h1 class="text-3xl">Cantidad de participantes: {{$total}}</h1>
             <livewire:utils.download-excel-live :event_id="$event_id" />
         </div>
 

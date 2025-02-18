@@ -12,8 +12,10 @@ class EventsDetailsLive extends Component
 {
     use EventsTrait,WithPagination,participantTrait;
     public string $event_id;
+    public int $total;
     public function render()
     {
+        $this->total = $this->getParticipantsByEvent($this->event_id)->count();
         return view('livewire.events.events-details-live',[
             'participants' => $this->getParticipantsByEvent($this->event_id)->paginate(50)
         ]);
