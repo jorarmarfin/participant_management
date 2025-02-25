@@ -20,7 +20,7 @@ class ParticipantByEventExport implements FromQuery,WithHeadings
 
     public function query()
     {
-        return $this->getQueryParticipantsByEvent($this->event_id)->get();
+        return $this->getQueryParticipantsByEvent($this->event_id);
     }
     public function headings(): array
     {
@@ -29,11 +29,13 @@ class ParticipantByEventExport implements FromQuery,WithHeadings
             'Nombres',
             'Apellidos',
             'Email',
-            'Telefono',
+            'Teléfono',
+            'Pais',
             'Departamento',
             'Provincia',
             'Distrito',
             'evento',
+            'Fecha de registro',
             'Estatus'
         ];
     }

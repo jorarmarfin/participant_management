@@ -49,7 +49,7 @@ trait EventsTrait
 
     public function getQueryParticipantsByEvent($event_id)
     {
-        return Participant::orderBy('id', 'desc')
+        return Participant::orderBy('participants.id', 'desc')
             ->join('event_participant', 'participants.id', '=', 'event_participant.participant_id')
             ->join('ubigeos as d', 'participants.ubigeo_id', '=', 'd.id')
             ->join('events as e', 'event_participant.event_id', '=', 'e.id')
@@ -59,10 +59,12 @@ trait EventsTrait
                 'participants.last_name',
                 'participants.email',
                 'participants.phone',
+                'participants.country',
                 'd.departamento',
                 'd.provincia',
                 'd.distrito',
                 'e.name as evento',
+                'participants.created_at',
                 'participants.status'
             );
     }
