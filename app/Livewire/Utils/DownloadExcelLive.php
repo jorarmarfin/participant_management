@@ -23,6 +23,7 @@ class DownloadExcelLive extends Component
     {
         return match ($code) {
             'PBE' => $this->downloadExcelParticipantByEvent($this->event_id, 'participant_by_event.xlsx'),
+            'CBW' => $this->downloadContactsWhatsappExport($this->event_id, 'contacts_by_whatsapp.xlsx'),
             default => redirect()->route('download.excel', ['event_id' => $this->event_id]),
         };
 

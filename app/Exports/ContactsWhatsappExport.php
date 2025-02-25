@@ -2,13 +2,12 @@
 
 namespace App\Exports;
 
-use App\Models\Event;
 use App\Traits\EventsTrait;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ParticipantByEventExport implements FromQuery,WithHeadings
+class ContactsWhatsappExport implements FromQuery,WithHeadings
 {
     use EventsTrait, Exportable;
     public function __construct(
@@ -17,24 +16,21 @@ class ParticipantByEventExport implements FromQuery,WithHeadings
     {
     }
 
-
     public function query()
     {
-        return $this->getQueryParticipantsByEvent($this->event_id)->get();
+        return $this->getQueryContactByWhatsapp($this->event_id);
     }
     public function headings(): array
     {
         return [
-            'ID',
-            'Nombres',
-            'Apellidos',
-            'Email',
-            'Telefono',
-            'Departamento',
-            'Provincia',
-            'Distrito',
-            'evento',
-            'Estatus'
+            'name',
+            'phone',
+            'email',
+            'var_1',
+            'var_2',
+            'var_3',
+            'var_4',
         ];
     }
+
 }

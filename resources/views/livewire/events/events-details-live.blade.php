@@ -15,9 +15,8 @@
                     <th>Teléfono</th>
                     <th>Email</th>
                     <th>Estatus</th>
+                    <th>Fecha</th>
                     <th>Acciones</th>
-
-
                 </tr>
                 </thead>
                 <tbody>
@@ -29,6 +28,7 @@
                         <td>{{ $participant->phone }}</td>
                         <td>{{ $participant->email }}</td>
                         <td>{{ $participant->status }}</td>
+                        <td>{{ $participant->created_at }}</td>
                         <td>
                             <x-primary-button wire:click="contact('{{ $participant->id }}','{{$participant->phone}}')" class="btn btn-primary">Contacto</x-primary-button>
                         </td>

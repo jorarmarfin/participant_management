@@ -5,30 +5,36 @@ namespace App\Traits;
 use App\Models\Event;
 use App\Models\Participant;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 trait EventsTrait
 {
     public function getEvents(): \Illuminate\Database\Eloquent\Builder
     {
-        return Event::orderBy('id','desc');
+        return Event::orderBy('id', 'desc');
     }
+
     public function storeEvent(array $data): void
     {
         Event::create($data);
     }
+
     public function getEventById($id)
     {
         return Event::find($id);
     }
+
     public function getImagenEvent($id)
     {
         return Event::find($id)->imagen;
     }
+
     public function getParticipantsByEvent($event_id)
     {
         $event = Event::find($event_id);
-        return Participant::orderBy('id','desc')->whereIn('id', $event->participants->pluck('id')->toArray());
+        return Participant::orderBy('id', 'desc')->whereIn('id', $event->participants->pluck('id')->toArray());
     }
+
     public function getMessageToSend($fecha): string
     {
         Carbon::setLocale('es'); // Asegurar idioma español
@@ -40,9 +46,10 @@ trait EventsTrait
             $fechaCarbon->translatedFormat('j \d\e F')
         );
     }
+
     public function getQueryParticipantsByEvent($event_id)
     {
-        return Participant::orderBy('id','desc')
+        return Participant::orderBy('id', 'desc')
             ->join('event_participant', 'participants.id', '=', 'event_participant.participant_id')
             ->join('ubigeos as d', 'participants.ubigeo_id', '=', 'd.id')
             ->join('events as e', 'event_participant.event_id', '=', 'e.id')
@@ -60,4 +67,21 @@ trait EventsTrait
             );
     }
 
+    public function getQueryContactByWhatsapp($event_id)
+    {
+        return Participant::orderBy('participants.id','desc')
+            ->join('event_participant', 'participants.id', '=', 'event_participant.participant_id')
+            ->join('ubigeos as d', 'participants.ubigeo_id', '=', 'd.id')
+            ->join('events as e', 'event_participant.event_id', '=', 'e.id')
+            ->where('e.id', $event_id)
+            ->select(
+                DB::raw('CONCAT(participants.names, " ", participants.last_name) as name'),
+                DB::raw('IF(participants.country = "PERÚ", CONCAT("51", participants.phone), participants.phone) as phone'),
+                'participants.email',
+                DB::raw('" " as var_1'),
+                DB::raw('" " as var_2'),
+                DB::raw('" " as var_3'),
+                DB::raw('" " as var_4')
+            );
+    }
 }
