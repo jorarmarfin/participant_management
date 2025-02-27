@@ -49,7 +49,7 @@ trait EventsTrait
 
     public function getQueryParticipantsByEvent($event_id)
     {
-        return Participant::orderBy('participants.id', 'desc')
+        return Participant::orderBy('participants.id', 'asc')
             ->join('event_participant', 'participants.id', '=', 'event_participant.participant_id')
             ->join('ubigeos as d', 'participants.ubigeo_id', '=', 'd.id')
             ->join('events as e', 'event_participant.event_id', '=', 'e.id')
@@ -71,7 +71,7 @@ trait EventsTrait
 
     public function getQueryContactByWhatsapp($event_id)
     {
-        return Participant::orderBy('participants.id','desc')
+        return Participant::orderBy('participants.id','asc')
             ->join('event_participant', 'participants.id', '=', 'event_participant.participant_id')
             ->join('ubigeos as d', 'participants.ubigeo_id', '=', 'd.id')
             ->join('events as e', 'event_participant.event_id', '=', 'e.id')
