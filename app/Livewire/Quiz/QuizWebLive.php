@@ -43,26 +43,51 @@ class QuizWebLive extends Component
     }
     public function save()
     {
-        if($this->form->country=='Perú'){
-            $this->validate([
+        $rules = [
+            'form.names' => 'required',
+            'form.last_name' => 'required',
+            'form.email' => 'required|email',
+            'form.phone' => 'required|min:9',
+            'form.country' => 'required',
+            'form.educational_institution_type' => 'required',
+            'form.policy' => 'required',
+        ];
+        $messages = [
+            'form.names.required' => 'El campo nombres es obligatorio',
+            'form.last_name.required' => 'El campo apellidos es obligatorio',
+            'form.email.required' => 'El campo email es obligatorio',
+            'form.email.email' => 'El campo email debe ser un email válido',
+            'form.phone.required' => 'El campo teléfono es obligatorio',
+            'form.phone.min' => 'El campo teléfono debe tener al menos 9 caracteres',
+            'form.country.required' => 'El campo país es obligatorio',
+            'form.educational_institution_type.required' => 'El campo tipo de institución educativa es obligatorio',
+            'form.policy.required' => 'Debe aceptar la política de privacidad',
+        ];
+
+        if ($this->form->country == 'Perú') {
+            $rules = array_merge($rules, [
                 'departamento' => 'required',
                 'provincia' => 'required',
                 'distrito' => 'required',
-            ],[
+                'form.ubigeo_id' => 'required',
+            ]);
+
+            $messages = array_merge($messages, [
                 'departamento.required' => 'El campo departamento es obligatorio',
                 'provincia.required' => 'El campo provincia es obligatorio',
                 'distrito.required' => 'El campo distrito es obligatorio',
             ]);
-
             $this->form->ubigeo_id = $this->distrito;
-        }
-        else{
+        } else {
             $this->form->ubigeo_id = null;
         }
-        $this->form->status = ParticipantStatus::NewWeb->value;
-        $this->validate();
-
-        $this->storeParticipant($this->form->all(),$this->event_id);
+        $this->form->phone = str_replace(['_', '-'], '', $this->form->phone);
+        $v = $this->validate($rules, $messages);
+        $v['form']['status'] = ParticipantStatus::NewWeb->value;
+        unset($v['departamento']);
+        unset($v['provincia']);
+        unset($v['distrito']);
+        $this->storeParticipant($v['form'], $this->event_id);
 
 
         $this->submitted = true;

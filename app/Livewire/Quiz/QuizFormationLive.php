@@ -66,6 +66,7 @@ class QuizFormationLive extends Component
             'form.email.email' => 'El campo email debe ser un email válido',
             'form.phone.required' => 'El campo teléfono es obligatorio',
             'form.phone.min' => 'El campo teléfono debe tener al menos 9 caracteres',
+            'form.country.required' => 'El campo país es obligatorio',
         ];
 
         if ($this->form->country == 'Perú') {
@@ -86,7 +87,6 @@ class QuizFormationLive extends Component
             $this->form->ubigeo_id = null;
         }
 
-//        $this->storeParticipant($this->form->all(),$this->event_id);
         $this->form->phone = str_replace(['_', '-'], '', $this->form->phone);
         $v = $this->validate($rules, $messages);
         $v['form']['status'] = ParticipantStatus::New->value;
