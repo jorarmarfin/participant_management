@@ -7,7 +7,7 @@
         @if($submitted)
             <div class="text-center text-3xl">
                 Gracias por llenar el formulario <br>
-                El enlace te llegará el 27 de febrero por la mañana.
+                {{$start_date}}
             </div>
         @else
             <form wire:submit="save" class="space-y-6 px-4">
