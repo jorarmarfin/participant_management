@@ -3,7 +3,6 @@
 namespace App\Livewire\Forms;
 
 use AllowDynamicProperties;
-use App\Models\Participant;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 

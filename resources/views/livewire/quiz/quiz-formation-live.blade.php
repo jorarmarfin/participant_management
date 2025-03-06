@@ -17,7 +17,7 @@
                     <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
                     <input type="email" id="email" name="email" wire:model.blur="form.email"
                            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                           placeholder="Ingresa tu correo electrónico" required>
+                           placeholder="Ingresa tu correo electrónico" >
                     @error('form.email')
                     <div class="bg-red-300 rounded p-2 m-2">
                         <span class="font-bold">{{ $message }}</span>
@@ -29,7 +29,7 @@
                     <label for="nombres" class="block text-gray-700 font-medium mb-2">Nombres</label>
                     <input type="text" id="nombres" name="nombres" wire:model="form.names"
                            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                           placeholder="Ingresa tus nombres" required>
+                           placeholder="Ingresa tus nombres" >
                     @error('form.names')
                         <div class="bg-red-300 rounded p-2 m-2">
                             <span class="font-bold">{{ $message }}</span>
@@ -43,7 +43,7 @@
                     <label for="apellidos" class="block text-gray-700 font-medium mb-2">Apellidos</label>
                     <input type="text" id="apellidos" name="apellidos" wire:model="form.last_name"
                            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                           placeholder="Ingresa tus apellidos" required>
+                           placeholder="Ingresa tus apellidos" >
                     @error('form.last_name')
                         <div class="bg-red-300 rounded p-2 m-2">
                             <span class="font-bold">{{ $message }}</span>
@@ -114,7 +114,7 @@
                     <label for="phone" class="block text-gray-700 font-medium mb-2">Teléfono celular</label>
                     <input type="text" id="phone" wire:model.defer="form.phone" x-ref="phoneInput"
                            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                           placeholder="000-000-000" required>
+                           placeholder="000-000-000" >
                     @error('form.phone')
                         <div class="bg-red-300 rounded p-2 m-2">
                             <span class="font-bold">{{ $message }}</span>
