@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use App\Enums\ParticipantStatus;
+
 trait DropDownListTrait
 {
     // tipo de institucion educativa
@@ -23,6 +25,10 @@ trait DropDownListTrait
             'web',
             'formation',
         ];
+    }
+    public function DDLStatus(): array
+    {
+        return ParticipantStatus::getAllParticipantStatuses();
     }
 
 

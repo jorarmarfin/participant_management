@@ -20,6 +20,12 @@ Route::middleware([
         return view('participant');
     })->name('participants');
 
+    Route::get('/participants/{id}/edit', function () {
+        return view('participant-edit', [
+            'id' => request()->id
+        ]);
+    })->name('participants.edit');
+
     Route::get('/events', function () {
         return view('events.index');
     })->name('events');

@@ -50,4 +50,8 @@ trait UbigeoTrait
             'Yibuti', 'Zambia', 'Zimbabue'];
     }
 
+    public function getUbigeoDescription($ubigeo_id)
+    {
+        return ($ubigeo_id) ? Ubigeo::where('id', $ubigeo_id)->first()->toArray() : null;
+    }
 }

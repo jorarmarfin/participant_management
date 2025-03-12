@@ -8,6 +8,8 @@ use Livewire\Form;
 
 class ParticipantsForm extends Form
 {
+    public ?Participant $participant;
+
     #[Validate('required')]
     public string $names = '';
 
@@ -32,6 +34,16 @@ class ParticipantsForm extends Form
     public bool $policy = false;
 
     public string $status = '';
+
+    public function setParticipant(Participant $participant)
+    {
+        $this->participant = $participant;
+        $this->email = $participant->email;
+        $this->names = $participant->names;
+        $this->last_name = $participant->last_name;
+        $this->phone = $participant->phone;
+        $this->educational_institution_type = $participant->educational_institution_type ?? '';
+    }
 
     public function updatedPhone($value)
     {

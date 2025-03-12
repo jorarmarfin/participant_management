@@ -36,7 +36,7 @@
                         <td>{{ $participant->created_at }}</td>
                         <td>{{ $participant?->ubigeo?->description }}</td>
                         <td>
-                            <x-primary-button wire:click="contact('{{ $participant->id }}','{{$participant->phone}}')" class="btn btn-primary">Contacto</x-primary-button>
+                            <x-primary-button wire:click="contact('{{ $participant->id }}','{{$participant->phone}}')" class="btn btn-primary">C</x-primary-button>
                         </td>
                     </tr>
                 @endforeach
