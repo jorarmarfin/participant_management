@@ -1,5 +1,17 @@
 <div>
     <div class="card">
+        <div class="flex flex-1 justify-end">
+            <button
+                wire:click="downLoadFile('PE')"
+                class="btn-success">
+                <i class="fas fa-file-excel"></i>
+            </button>
+            <button
+                wire:click="downLoadFile('WP')"
+                class="btn-success ms-2">
+                <i class="fab fa-whatsapp"></i>
+            </button>
+        </div>
         <div class="grid grid-cols-5 gap-4">
             <div>
                 <label class="font-bold">Estatus {{$currentStatus}}</label>
@@ -55,7 +67,7 @@
                         <td>{{ $participant->phone }}</td>
                         <td>{{ $participant->status }}</td>
                         <td>{{ $participant->country }}</td>
-                        <td>{{ $participant?->ubigeo?->description }}</td>
+                        <td>{{ $participant?->ubigeo }}</td>
                         <td class="flex">
                             <button wire:click="contact('{{ $participant->id }}','{{ $participant->phone }}')"
                                     type="button"

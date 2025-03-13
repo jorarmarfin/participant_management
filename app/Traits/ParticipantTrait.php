@@ -5,21 +5,36 @@ namespace App\Traits;
 use App\Enums\ParticipantStatus;
 use App\Models\Participant;
 use App\Services\WaveConnectedService;
+use Illuminate\Support\Facades\DB;
 
 trait ParticipantTrait
 {
     public function getParticipants($currentStatus,$search = null)
     {
         $search = ($search)?mb_strtoupper($search):null;
-        $participant = Participant::orderBy('names','asc');
+        $participants = Participant::orderBy('participants.names','asc');
         if($currentStatus != ' '){
-            $participant->where('status',$currentStatus);
+            $participants->where('participants.status',$currentStatus);
         }
         if($search){
-            $participant->where('names','like','%'.$search.'%')
+            $participants->where('participants.names','like','%'.$search.'%')
             ->orWhere('last_name','like','%'.$search.'%');
         }
-        return $participant;
+        $participants = $participants->join('ubigeos as u','u.id','=','participants.ubigeo_id');
+
+        return $participants->select(
+            'participants.id',
+            'participants.code_pp',
+            'participants.broadcast_list',
+            'participants.names',
+            'participants.last_name',
+            'participants.email',
+            'participants.phone',
+            'participants.country',
+            'u.description as ubigeo',
+            'participants.status',
+            'participants.created_at'
+        );
     }
     public function getParticipant($participant_id)
     {
@@ -52,6 +67,31 @@ trait ParticipantTrait
             $sw = true;
         }
         return $sw;
+    }
+    public function getParticipantsByWhatsapp($currentStatus,$search = null)
+    {
+        $search = ($search)?mb_strtoupper($search):null;
+        $participants =  Participant::orderBy('participants.id','asc')
+            ->join('event_participant', 'participants.id', '=', 'event_participant.participant_id')
+            ->join('ubigeos as d', 'participants.ubigeo_id', '=', 'd.id')
+            ->join('events as e', 'event_participant.event_id', '=', 'e.id')
+            ->select(
+                DB::raw('CONCAT(participants.names, " ", participants.last_name) as name'),
+                DB::raw('IF(participants.country = "PERÚ", CONCAT("51", participants.phone), participants.phone) as phone'),
+                'participants.email',
+                DB::raw('" " as var_1'),
+                DB::raw('" " as var_2'),
+                DB::raw('" " as var_3'),
+                DB::raw('" " as var_4')
+            );
+        if($currentStatus != ' '){
+            $participants->where('participants.status',$currentStatus);
+        }
+        if($search){
+            $participants->where('participants.names','like','%'.$search.'%')
+            ->orWhere('last_name','like','%'.$search.'%');
+        }
+        return $participants;
     }
 
 

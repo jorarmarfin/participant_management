@@ -4,12 +4,13 @@ namespace App\Livewire\Participant;
 
 use App\Traits\DropDownListTrait;
 use App\Traits\ParticipantTrait;
+use App\Traits\UtilsTrait;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ParticipantLive extends Component
 {
-    use ParticipantTrait,WithPagination,DropDownListTrait;
+    use ParticipantTrait,WithPagination,DropDownListTrait,UtilsTrait;
     public string $currentStatus = ' ';
     public string $search = '';
 
@@ -35,5 +36,19 @@ class ParticipantLive extends Component
                 'message'=>'Contacto no adherido'
             ]);
         }
+    }
+    public function downLoadFile($code)
+    {
+        return match ($code) {
+            'PE' => $this->downloadExcelParticipant(
+                $this->getParticipants($this->currentStatus,$this->search),
+                'participants.xlsx'
+            ),
+            'WP' => $this->downloadExcelParticipantWhatsapp(
+                $this->getParticipantsByWhatsapp($this->currentStatus,$this->search),
+                'contacts.xlsx'
+            ),
+        };
+
     }
 }
