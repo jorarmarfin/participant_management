@@ -16,11 +16,14 @@
                     </h1>
 
                     <p class="mt-6 text-gray-500 leading-relaxed">
-                        Sistema diseñado para gestionar el registro y seguimiento de participantes en eventos organizados por ONGs, instituciones educativas o comunidades. Su objetivo principal es facilitar la fidelización de los asistentes y proporcionar herramientas para un análisis estadístico eficiente.
+                        Sistema diseñado para gestionar de manera eficiente el registro, seguimiento y
+                        fidelización de participantes en eventos y campañas organizadas por la plataforma
+                        Padres Peruanos. Facilita la administración de adherencias, optimiza la comunicación y
+                        fortalece el vínculo con las familias comprometidas con la misión de la plataforma
                     </p>
                     <div class="grid grid-cols-4 gap-4 mt-8">
                         <livewire:dashboard.card-attached-live :count="$count_participants" name="Participantes" />
-                        <livewire:dashboard.card-attached-live :count="$count_attached" name="Adherido" />
+                        <livewire:dashboard.card-attached-live :count="$count_attached" name="Adheridos" />
                         <livewire:dashboard.card-attached-live :count="$count_new" name="Nuevo (Charla)" />
                         <livewire:dashboard.card-attached-live :count="$count_new_web" name="Nuevo (web)" />
                     </div>
