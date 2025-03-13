@@ -158,7 +158,17 @@
             </div>
             @enderror
         </div>
-        <div></div>
+        <div>
+            <label for="observation" class="block text-gray-700 font-medium mb-2">Observaciones</label>
+            <textarea id="observation" name="observation" wire:model="form.observation"
+                      class="input-textarea"
+                      placeholder="Ingresa tus observaciones"></textarea>
+            @error('form.observation')
+            <div class="bg-red-300 rounded p-2 m-2">
+                <span class="font-bold">{{ $message }}</span>
+            </div>
+            @enderror
+        </div>
 
         <!-- Botón Enviar -->
         <div class="text-center">

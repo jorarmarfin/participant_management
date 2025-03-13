@@ -62,3 +62,6 @@
 .input-text{
     @apply w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500
 }
+.input-textarea{
+    @apply w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 h-32
+}
