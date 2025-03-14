@@ -22,7 +22,7 @@ trait ParticipantTrait
             ->orWhere('participants.phone','like','%'.$search.'%')
             ;
         }
-        $participants = $participants->join('ubigeos as u','u.id','=','participants.ubigeo_id');
+        $participants = $participants->leftjoin('ubigeos as u','u.id','=','participants.ubigeo_id');
 
         return $participants->select(
             'participants.id',
