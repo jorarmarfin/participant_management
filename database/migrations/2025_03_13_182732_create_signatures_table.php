@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('signatures', function (Blueprint $table) {
             $table->id();
+            $table->string('code_pp')->nullable()->index();
             $table->string('names')->index();
             $table->string('last_name')->nullable()->index();
             $table->string('email')->nullable()->index();
