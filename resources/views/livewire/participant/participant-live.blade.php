@@ -44,8 +44,8 @@
                 <tr>
                     <th>Código pp</th>
                     <th>Lista difusión</th>
-                    <th>Nombres</th>
                     <th>Apellidos</th>
+                    <th>Nombres</th>
                     <th>Email</th>
                     <th>Teléfono</th>
                     <th>Estatus</th>
@@ -61,8 +61,8 @@
                     <tr>
                         <td>{{ $participant->code_pp }}</td>
                         <td>{{ $participant->broadcast_list }}</td>
-                        <td>{{ $participant->names }}</td>
                         <td>{{ $participant->last_name }}</td>
+                        <td>{{ $participant->names }}</td>
                         <td>{{ $participant->email }}</td>
                         <td>{{ $participant->phone }}</td>
                         <td>{{ $participant->status }}</td>

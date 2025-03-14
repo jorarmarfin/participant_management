@@ -23,6 +23,9 @@ trait ParticipantTrait
             ;
         }
         $participants = $participants->leftjoin('ubigeos as u','u.id','=','participants.ubigeo_id');
+        $participants = $participants
+            ->orderBy('participants.last_name','asc')
+            ->orderBy('participants.names','asc');
 
         return $participants->select(
             'participants.id',
