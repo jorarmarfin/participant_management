@@ -27,6 +27,13 @@
                         <livewire:dashboard.card-attached-live :count="$count_new" name="Nuevo (Charla)" />
                         <livewire:dashboard.card-attached-live :count="$count_new_web" name="Nuevo (web)" />
                     </div>
+                    <div>
+                        <h2 class="mt-8 text-lg font-medium text-gray-900">Descripción de datos</h2>
+                        <ul>
+                            <li>Usuarios sin email: {{$count_not_email}}</li>
+                            <li>Teléfonos no validos: {{$count_phone_not_valid}}</li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>

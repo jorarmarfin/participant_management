@@ -19,6 +19,8 @@ class DashboardController extends Controller
             'count_new_petition' => $this->countParticipantsByStatus(ParticipantStatus::newPetition->value),
             'count_invited' => $this->countParticipantsByStatus(ParticipantStatus::invited->value),
             'count_participants' => $this->countParticipants(),
+            'count_not_email' => $this->countParticipantsByNotEmail(),
+            'count_phone_not_valid' => $this->countParticipantsByPhoneNotValid(),
         ]);
 
     }
