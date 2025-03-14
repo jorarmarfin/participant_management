@@ -30,7 +30,7 @@
                     wire:model.live="search"
                     type="text"
                     class="input-text"
-                    placeholder="Buscar por nombres" />
+                    placeholder="Buscar por nombres o teléfonos" />
 
             </div>
         </div>

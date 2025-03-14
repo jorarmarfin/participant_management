@@ -18,7 +18,9 @@ trait ParticipantTrait
         }
         if($search){
             $participants->where('participants.names','like','%'.$search.'%')
-            ->orWhere('last_name','like','%'.$search.'%');
+            ->orWhere('participants.last_name','like','%'.$search.'%')
+            ->orWhere('participants.phone','like','%'.$search.'%')
+            ;
         }
         $participants = $participants->join('ubigeos as u','u.id','=','participants.ubigeo_id');
 
