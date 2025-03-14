@@ -25,7 +25,7 @@
                 </select>
             </div>
             <div>
-                <label class="font-bold">Buscar {{$search}}</label>
+                <label class="font-bold">Buscar</label>
                 <input
                     wire:model.live="search"
                     type="text"
