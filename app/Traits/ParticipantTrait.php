@@ -6,6 +6,7 @@ use App\Enums\ParticipantStatus;
 use App\Models\Participant;
 use App\Services\WaveConnectedService;
 use Illuminate\Support\Facades\DB;
+use function PHPUnit\Framework\isNull;
 
 trait ParticipantTrait
 {
@@ -63,6 +64,23 @@ trait ParticipantTrait
     {
         $participant = Participant::create($data);
         $participant->events()->attach($event_id);
+        return $participant;
+    }
+    public function getParticipantValidateForPhone($field,$value)
+    {
+        $participant = Participant::where($field,$value)
+            ->whereNotNull('phone')
+            ->Where('phone','<>','')
+            ->first();
+
+        if($participant){
+            if($participant->country=='PERÚ'){
+                if(is_null($participant->ubigeo_id)){
+                    return null;
+                }
+            }
+        }
+
         return $participant;
     }
     public function getParticipantByField($field,$value)

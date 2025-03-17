@@ -23,7 +23,7 @@ class QuizFormationLive extends Component
     public function render()
     {
         if ($this->form->email) {
-            $participant = $this->getParticipantByField('email', $this->form->email);
+            $participant = $this->getParticipantValidateForPhone('email', $this->form->email);
             if ($participant) {
                 $this->setParticipantInEvent($participant, $this->event_id);
                 $this->submitted = true;
