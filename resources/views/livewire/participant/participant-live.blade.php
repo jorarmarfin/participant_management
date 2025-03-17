@@ -14,7 +14,7 @@
         </div>
         <div class="grid grid-cols-5 gap-4">
             <div>
-                <label class="font-bold">Estatus {{$currentStatus}}</label>
+                <label class="font-bold">Estatus</label>
                 <select
                     wire:model.live="currentStatus"
                     class="form-select">
@@ -32,6 +32,17 @@
                     class="input-text"
                     placeholder="Buscar por nombres o teléfonos" />
 
+            </div>
+            <div>
+                <label class="font-bold">Filtro</label>
+                <select
+                    wire:model.live="notSwitch"
+                    class="form-select">
+                    <option value="0">Seleccione</option>
+                    <option value=1>Personas sin teléfonos</option>
+                    <option value=2>Personas sin email</option>
+                    <option value=3>Personas sin teléfono y sin email</option>
+                </select>
             </div>
         </div>
         <div wire:loading wire:target="search" class="text-center py-4">

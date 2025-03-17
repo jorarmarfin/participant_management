@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 trait ParticipantTrait
 {
-    public function getParticipants($currentStatus,$search = null)
+    public function getParticipants($currentStatus,$search = null,$notSwitch = 0)
     {
         $search = ($search)?mb_strtoupper($search):null;
         $participants = Participant::orderBy('participants.names','asc');
@@ -21,6 +21,9 @@ trait ParticipantTrait
             ->orWhere('participants.last_name','like','%'.$search.'%')
             ->orWhere('participants.phone','like','%'.$search.'%')
             ;
+        }
+        if ($notSwitch>0){
+            $participants = $this->applyFilter($participants,$notSwitch);
         }
         $participants = $participants->leftjoin('ubigeos as u','u.id','=','participants.ubigeo_id');
         $participants = $participants
@@ -40,6 +43,16 @@ trait ParticipantTrait
             'participants.status',
             'participants.created_at'
         );
+    }
+    public function applyFilter($participant,$filter)
+    {
+        return match($filter) {
+            1 => $participant->whereNull('participants.phone'),
+            2 => $participant->whereNull('participants.email'),
+            3 => $participant->whereNull('participants.phone')->whereNull('participants.email'),
+            default => $participant,
+        };
+
     }
     public function getParticipant($participant_id)
     {
@@ -73,7 +86,7 @@ trait ParticipantTrait
         }
         return $sw;
     }
-    public function getParticipantsByWhatsapp($currentStatus,$search = null)
+    public function getParticipantsByWhatsapp($currentStatus,$search = null,$notSwitch = 0)
     {
         $search = ($search)?mb_strtoupper($search):null;
         $participants =  Participant::orderBy('participants.id','asc')
@@ -95,6 +108,9 @@ trait ParticipantTrait
         if($search){
             $participants->where('participants.names','like','%'.$search.'%')
             ->orWhere('last_name','like','%'.$search.'%');
+        }
+        if ($notSwitch>0){
+            $participants = $this->applyFilter($participants,$notSwitch);
         }
         return $participants;
     }
