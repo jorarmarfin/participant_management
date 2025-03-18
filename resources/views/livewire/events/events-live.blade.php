@@ -14,8 +14,6 @@
                     <th>Imagen</th>
                     <th>Enlace</th>
                     <th>Acciones</th>
-
-
                 </tr>
                 </thead>
                 <tbody>

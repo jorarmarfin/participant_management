@@ -21,11 +21,12 @@
                         Padres Peruanos. Facilita la administración de adherencias, optimiza la comunicación y
                         fortalece el vínculo con las familias comprometidas con la misión de la plataforma
                     </p>
-                    <div class="grid grid-cols-4 gap-4 mt-8">
+                    <div class="grid grid-cols-5 gap-4 mt-8">
                         <livewire:dashboard.card-attached-live :count="$count_participants" name="Participantes" />
                         <livewire:dashboard.card-attached-live :count="$count_attached" name="Adheridos" />
                         <livewire:dashboard.card-attached-live :count="$count_new" name="Nuevo (Charla)" />
                         <livewire:dashboard.card-attached-live :count="$count_new_web" name="Nuevo (web)" />
+                        <livewire:dashboard.card-attached-live :count="$count_new_campaigns" name="Campañas" />
                     </div>
                     <div>
                         <h2 class="mt-8 text-lg font-medium text-gray-900">Descripción de datos</h2>

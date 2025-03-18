@@ -8,7 +8,7 @@ enum ParticipantStatus: string
     case NewWeb = 'Nuevo (web)';
     case Attached = 'Adherido';
     case RecurrentChat = 'Recurrente (Charla)';
-    case newPetition = 'Nuevo (firmó petición)';
+    case newCampaigns = 'Campañas';
     case invited = 'Invitado a adherirse';
     public static function getAllParticipantStatuses(): array
     {

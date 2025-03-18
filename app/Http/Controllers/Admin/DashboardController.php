@@ -16,7 +16,7 @@ class DashboardController extends Controller
             'count_new_web' => $this->countParticipantsByStatus(ParticipantStatus::NewWeb->value),
             'count_attached' => $this->countParticipantsByStatus(ParticipantStatus::Attached->value),
             'count_recurrent_chat' => $this->countParticipantsByStatus(ParticipantStatus::RecurrentChat->value),
-            'count_new_petition' => $this->countParticipantsByStatus(ParticipantStatus::newPetition->value),
+            'count_new_campaigns' => $this->countParticipantsByStatus(ParticipantStatus::newCampaigns->value),
             'count_invited' => $this->countParticipantsByStatus(ParticipantStatus::invited->value),
             'count_participants' => $this->countParticipants(),
             'count_not_email' => $this->countParticipantsByNotEmail(),
