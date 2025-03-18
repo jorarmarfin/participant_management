@@ -24,7 +24,7 @@
                         <td>{{ $loop->index + 1 }}</td>
                         <td>{{ $event->name }}</td>
                         <td>
-                            <img src="{{ $event->imagen }}" alt="{{ $event->name }}" class="w-20 h-20">
+                            <img src="{{ $event->imagen }}" alt="{{ $event->name }}" class=" h-20">
                         </td>
                         <td>
                             <a href="{{ route('form.web', [$event->type,$event->id]) }}" target="_blank" class=" underline text-blue-700 ">
