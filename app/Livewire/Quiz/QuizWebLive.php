@@ -87,7 +87,10 @@ class QuizWebLive extends Component
         unset($v['departamento']);
         unset($v['provincia']);
         unset($v['distrito']);
+
         $this->storeParticipant($v['form'], $this->event_id);
+        $messages = '¡Gracias por registrarte!';
+        $this->sendWhatsapp($this->form->phone);
 
 
         $this->submitted = true;

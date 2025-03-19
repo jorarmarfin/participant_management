@@ -52,4 +52,16 @@ class WaveConnectedService
         return ['data' => ['isMyContact' => false]];
     }
 
+    public function apiSendWhatsapp(int $instance,string $phone,string $message)
+    {
+        $data = $this->Call('POST', '/send-whatsapp', [
+            'json' => [
+                'instance' => $instance,
+                'phone' => $phone,
+                'message' => $message
+            ]
+        ]);
+        return json_encode($data);
+    }
+
 }

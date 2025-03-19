@@ -108,9 +108,6 @@ trait ParticipantTrait
     {
         $search = ($search)?mb_strtoupper($search):null;
         $participants =  Participant::orderBy('participants.id','asc')
-            ->join('event_participant', 'participants.id', '=', 'event_participant.participant_id')
-            ->join('ubigeos as d', 'participants.ubigeo_id', '=', 'd.id')
-            ->join('events as e', 'event_participant.event_id', '=', 'e.id')
             ->select(
                 DB::raw('CONCAT(participants.names, " ", participants.last_name) as name'),
                 DB::raw('IF(participants.country = "PERÚ", CONCAT("51", participants.phone), participants.phone) as phone'),
@@ -131,6 +128,12 @@ trait ParticipantTrait
             $participants = $this->applyFilter($participants,$notSwitch);
         }
         return $participants;
+    }
+    public function sendWhatsapp($phone,$message)
+    {
+        $instance = env('WAVECONNECTED_INSTANCE');
+        return (new WaveConnectedService)->apiSendWhatsapp($instance,$phone,$message);
+
     }
 
 
