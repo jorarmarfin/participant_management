@@ -29,7 +29,7 @@ trait WhatsappTrait
             "*¡SEAMOS MÁS PARA QUE NOS ESCUCHEN MEJOR!*\n".
             "Atte.\n".
             "*www.padresperuanos.pe*";
-        (new WaveConnectedService)->apiSendWhatsapp($instance,$email,'$phone',$message);
+        (new WaveConnectedService)->apiSendWhatsapp($instance,$email,$phone,$message);
     }
 
 }
