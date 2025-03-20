@@ -5,12 +5,6 @@ namespace App\Services;
 use GuzzleHttp\Client;
 class WaveConnectedService
 {
-    public string $instance;
-    public function __construct()
-    {
-        $this->instance = env('WAVECONNECTED_INSTANCE',30135);
-    }
-
     public function Call(string $method, string $url, array $options = []): bool|array
     {
         // Crear un nuevo cliente HTTP
