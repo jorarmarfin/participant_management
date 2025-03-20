@@ -8,7 +8,7 @@ class WaveConnectedService
     public string $instance;
     public function __construct()
     {
-        $this->instance = env('WAVECONNECTED_INSTANCE','30135');
+        $this->instance = env('WAVECONNECTED_INSTANCE',30135);
     }
 
     public function Call(string $method, string $url, array $options = []): bool|array
