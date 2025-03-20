@@ -8,7 +8,7 @@ class WaveConnectedService
     public string $instance;
     public function __construct()
     {
-        $this->instance = '30135';
+        $this->instance = env('WAVECONNECTED_INSTANCE','30135');
     }
 
     public function Call(string $method, string $url, array $options = []): bool|array
@@ -17,12 +17,12 @@ class WaveConnectedService
         $client = new Client();
         try {
             $options['headers'] = [
-                'Authorization' => 'Bearer ' . env('WAVECONNECTED_API_TOKEN'),
+                'Authorization' => 'Bearer ' . env('WAVECONNECTED_API_TOKEN','tjcE4JqHkhUFVHZQC8n3fUSw56AWWWIfc0zdefDjd60e6a7a'),
                 'accept' => 'application/json',
                 'content-type' => 'application/json',
             ];
             // Realizar la solicitud HTTP
-            $uri = env('WAVECONNECTED_URL').'/api';
+            $uri = env('WAVECONNECTED_URL','https://waveconnected.com').'/api';
             $response = $client->request($method, $uri . $url, $options);
             // Decodificar la respuesta JSON a un array de PHP
             return json_decode($response->getBody(), true);
