@@ -9,15 +9,23 @@ trait WhatsappTrait
     public function sendWhatsAppJoinForm($name,$email, $phone): void
     {
         $message = "El usuario $name, con email: $email, teléfono: $phone, ha llenado el formulario únete";
-        //960749076
-        $res = (new WaveConnectedService)->apiSendWhatsapp('960749076',$message);
-        if($res){
-            echo "Mensaje enviado";
+        $res1 = (new WaveConnectedService)->apiSendWhatsapp('960749076',$message);
+        if($res1){
+            echo "Mensaje enviado\n";
         }else{
-            echo "Error al enviar mensaje";
+            echo "Error al enviar mensaje\n";
         }
     }
-    public function sendWhatsAppWelcome($name,$email, $phone): void
+    public function sendWhatsAppJoinNameForm($name): void
+    {
+        $res2 = (new WaveConnectedService)->apiSendWhatsapp('960749076',$name);
+        if($res2){
+            echo "Mensaje enviado\n";
+        }else{
+            echo "Error al enviar mensaje\n";
+        }
+    }
+    public function sendWhatsAppWelcome($name, $phone): void
     {
         $message = "*¡Hola!. $name* \n".
             "Te damos la bienvenida a la plataforma participativa Padres Peruanos, un movimiento ciudadano cuya finalidad es la promoción de la libertad y la defensa del derecho de los padres de familia a ser los primeros educadores de sus hijos. Recibimos con mucho agrado tu deseo de participar.\n".
@@ -35,9 +43,9 @@ trait WhatsappTrait
             "*www.padresperuanos.pe*";
         $res = (new WaveConnectedService)->apiSendWhatsapp($phone,$message);
         if($res){
-            echo "Mensaje enviado";
+            echo "Mensaje enviado\n";
         }else{
-            echo "Error al enviar mensaje";
+            echo "Error al enviar mensaje\n";
         }
     }
 

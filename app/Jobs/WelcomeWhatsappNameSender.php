@@ -6,14 +6,14 @@ use App\Traits\WhatsappTrait;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
-class WelcomeWhatsappSender implements ShouldQueue
+class WelcomeWhatsappNameSender implements ShouldQueue
 {
-    use Queueable, WhatsappTrait;
+    use Queueable,WhatsappTrait;
 
     /**
      * Create a new job instance.
      */
-    public function __construct(public string $name, public string $phone)
+    public function __construct(public string $name)
     {
         //
     }
@@ -23,6 +23,6 @@ class WelcomeWhatsappSender implements ShouldQueue
      */
     public function handle(): void
     {
-        $this->sendWhatsAppWelcome($this->name, $this->phone);
+        $this->sendWhatsAppJoinNameForm($this->name);
     }
 }

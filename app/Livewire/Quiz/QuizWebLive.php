@@ -4,6 +4,7 @@ namespace App\Livewire\Quiz;
 
 use App\Enums\ParticipantStatus;
 use App\Jobs\JoinFormWhatsappSender;
+use App\Jobs\WelcomeWhatsappNameSender;
 use App\Jobs\WelcomeWhatsappSender;
 use App\Livewire\Forms\ParticipantsForm;
 use App\Traits\DropDownListTrait;
@@ -100,8 +101,8 @@ class QuizWebLive extends Component
     }
     public function sendMessageTheWhatsApp($name,$email,$phone):void
     {
-        WelcomeWhatsappSender::dispatch( $name,$email,$phone);
+        WelcomeWhatsappSender::dispatch( $name,$phone);
+        WelcomeWhatsappNameSender::dispatch($name);
         JoinFormWhatsappSender::dispatch($name,$email,$phone);
-
     }
 }
