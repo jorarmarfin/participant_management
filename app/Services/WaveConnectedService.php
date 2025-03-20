@@ -55,12 +55,12 @@ class WaveConnectedService
         return ['data' => ['isMyContact' => false]];
     }
 
-    public function apiSendWhatsapp(string $email,string $phone,string $message): false|string
+    public function apiSendWhatsapp(string $phone,string $message): false|string
     {
         $data = $this->Call('POST', '/send-whatsapp', [
             'json' => [
                 'instance' => env('WAVECONNECTED_INSTANCE'),
-                'email' => $email,
+                'email' => env('WAVECONNECTED_USER_EMAIL'),
                 'phone' => '51'.$phone,
                 'message' => $message
             ]

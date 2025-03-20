@@ -10,7 +10,7 @@ trait WhatsappTrait
     {
         $message = "El usuario $name, con email: $email, teléfono: $phone, ha llenado el formulario únete";
         //960749076
-        $res = (new WaveConnectedService)->apiSendWhatsapp($email,'960749076',$message);
+        $res = (new WaveConnectedService)->apiSendWhatsapp('960749076',$message);
         if($res){
             echo "Mensaje enviado";
         }else{
@@ -33,7 +33,7 @@ trait WhatsappTrait
             "*¡SEAMOS MÁS PARA QUE NOS ESCUCHEN MEJOR!*\n".
             "Atte.\n".
             "*www.padresperuanos.pe*";
-        $res = (new WaveConnectedService)->apiSendWhatsapp($email,$phone,$message);
+        $res = (new WaveConnectedService)->apiSendWhatsapp($phone,$message);
         if($res){
             echo "Mensaje enviado";
         }else{
