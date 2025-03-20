@@ -9,7 +9,9 @@ trait WhatsappTrait
     public function sendWhatsAppJoinForm($name,$email, $phone): void
     {
         $message = "El usuario $name, con email: $email, teléfono: $phone, ha llenado el formulario únete";
-        (new WaveConnectedService)->apiSendWhatsapp($email,'51960749076',$message);
+        //960749076
+        $res = (new WaveConnectedService)->apiSendWhatsapp($email,'960749076',$message);
+        echo "Respuesta: $res";
     }
     public function sendWhatsAppWelcome($name,$email, $phone): void
     {
@@ -27,7 +29,8 @@ trait WhatsappTrait
             "*¡SEAMOS MÁS PARA QUE NOS ESCUCHEN MEJOR!*\n".
             "Atte.\n".
             "*www.padresperuanos.pe*";
-        (new WaveConnectedService)->apiSendWhatsapp($email,$phone,$message);
+        $res = (new WaveConnectedService)->apiSendWhatsapp($email,$phone,$message);
+        echo "Respuesta: $res";
     }
 
 }

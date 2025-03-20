@@ -63,11 +63,10 @@ class WaveConnectedService
             'json' => [
                 'instance' => $this->instance,
                 'email' => $email,
-                'phone' => $phone,
+                'phone' => '51'.$phone,
                 'message' => $message
             ]
         ]);
         return json_encode($data);
     }
-
 }

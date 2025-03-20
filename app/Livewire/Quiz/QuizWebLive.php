@@ -100,7 +100,6 @@ class QuizWebLive extends Component
     }
     public function sendMessageTheWhatsApp($name,$email,$phone):void
     {
-        $phone = '51'.$phone;
         WelcomeWhatsappSender::dispatch( $name,$email,$phone);
         JoinFormWhatsappSender::dispatch($name,$email,$phone);
 
