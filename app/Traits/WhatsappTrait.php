@@ -8,13 +8,11 @@ trait WhatsappTrait
 {
     public function sendWhatsAppJoinForm($name,$email, $phone): void
     {
-        $instance = env('WAVECONNECTED_INSTANCE');
         $message = "El usuario $name, con email: $email, teléfono: $phone, ha llenado el formulario únete";
-        (new WaveConnectedService)->apiSendWhatsapp($instance,$email,'51960749076',$message);
+        (new WaveConnectedService)->apiSendWhatsapp($email,'51960749076',$message);
     }
     public function sendWhatsAppWelcome($name,$email, $phone): void
     {
-        $instance = env('WAVECONNECTED_INSTANCE');
         $message = "*¡Hola!. $name* \n".
             "Te damos la bienvenida a la plataforma participativa Padres Peruanos, un movimiento ciudadano cuya finalidad es la promoción de la libertad y la defensa del derecho de los padres de familia a ser los primeros educadores de sus hijos. Recibimos con mucho agrado tu deseo de participar.\n".
             "*Ingrésanos A TUS CONTACTOS del CELULAR para que puedas recibir la información de nuestra lista de difusión por WhatsApp 960749076*.\n".
@@ -29,7 +27,7 @@ trait WhatsappTrait
             "*¡SEAMOS MÁS PARA QUE NOS ESCUCHEN MEJOR!*\n".
             "Atte.\n".
             "*www.padresperuanos.pe*";
-        (new WaveConnectedService)->apiSendWhatsapp($instance,$email,$phone,$message);
+        (new WaveConnectedService)->apiSendWhatsapp($email,$phone,$message);
     }
 
 }

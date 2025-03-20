@@ -98,8 +98,7 @@ trait ParticipantTrait
     public function isMyContact($participant_id,$phone):bool
     {
         $sw = false;
-        $instance = env('WAVECONNECTED_INSTANCE');
-        $contact = (new WaveConnectedService)->getContactById($instance,$phone);
+        $contact = (new WaveConnectedService)->getContactById($phone);
         if($contact['data']['data']['isMyContact']){
             $participant = Participant::find($participant_id);
             $participant->status = ParticipantStatus::Attached;
@@ -132,12 +131,6 @@ trait ParticipantTrait
             $participants = $this->applyFilter($participants,$notSwitch);
         }
         return $participants;
-    }
-    public function sendWhatsapp($phone,$message)
-    {
-        $instance = env('WAVECONNECTED_INSTANCE');
-        return (new WaveConnectedService)->apiSendWhatsapp($instance,$phone,$message);
-
     }
 
 

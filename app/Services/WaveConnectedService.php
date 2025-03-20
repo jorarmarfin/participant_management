@@ -5,6 +5,12 @@ namespace App\Services;
 use GuzzleHttp\Client;
 class WaveConnectedService
 {
+    public string $instance;
+    public function __construct()
+    {
+        $this->instance = env('WAVECONNECTED_INSTANCE');
+    }
+
     public function Call(string $method, string $url, array $options = []): bool|array
     {
         // Crear un nuevo cliente HTTP
@@ -32,15 +38,14 @@ class WaveConnectedService
     }
 
     /**
-     * @param int $instance
      * @param string $phone
      * @return bool|array
      */
-   public function getContactById(int $instance, string $phone): bool|array
+   public function getContactById( string $phone): bool|array
     {
         $data = $this->Call('POST', '/get-contact-by-id', [
             'json' => [
-                'instance' => $instance,
+                'instance' => $this->instance,
                 'phone' => $phone
             ]
         ]);
@@ -52,11 +57,11 @@ class WaveConnectedService
         return ['data' => ['isMyContact' => false]];
     }
 
-    public function apiSendWhatsapp(int $instance,string $email,string $phone,string $message)
+    public function apiSendWhatsapp(string $email,string $phone,string $message): false|string
     {
         $data = $this->Call('POST', '/send-whatsapp', [
             'json' => [
-                'instance' => $instance,
+                'instance' => $this->instance,
                 'email' => $email,
                 'phone' => $phone,
                 'message' => $message
