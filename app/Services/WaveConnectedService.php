@@ -39,7 +39,7 @@ class WaveConnectedService
     {
         $data = $this->Call('POST', '/get-contact-by-id', [
             'json' => [
-                'instance' => '30135',
+                'instance' => env('WAVECONNECTED_INSTANCE'),
                 'phone' => $phone
             ]
         ]);
@@ -55,7 +55,7 @@ class WaveConnectedService
     {
         $data = $this->Call('POST', '/send-whatsapp', [
             'json' => [
-                'instance' => '30135',
+                'instance' => env('WAVECONNECTED_INSTANCE'),
                 'email' => $email,
                 'phone' => '51'.$phone,
                 'message' => $message
