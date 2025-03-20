@@ -63,8 +63,12 @@ trait ParticipantTrait
     public function storeParticipant($data,$event_id)
     {
         $participant = Participant::create($data);
-        $participant->events()->attach($event_id);
-        return $participant;
+        if($participant){
+            $participant->events()->attach($event_id);
+            return $participant;
+        }else{
+            return null;
+        }
     }
     public function getParticipantValidateForPhone($field,$value)
     {

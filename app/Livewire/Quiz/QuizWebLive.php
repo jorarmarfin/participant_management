@@ -3,17 +3,19 @@
 namespace App\Livewire\Quiz;
 
 use App\Enums\ParticipantStatus;
+use App\Jobs\JoinFormWhatsappSender;
+use App\Jobs\WelcomeWhatsappSender;
 use App\Livewire\Forms\ParticipantsForm;
-use App\Models\Participant;
 use App\Traits\DropDownListTrait;
 use App\Traits\EventsTrait;
 use App\Traits\ParticipantTrait;
 use App\Traits\UbigeoTrait;
+use App\Traits\WhatsappTrait;
 use Livewire\Component;
 
 class QuizWebLive extends Component
 {
-    use UbigeoTrait,EventsTrait,ParticipantTrait,DropDownListTrait;
+    use UbigeoTrait,EventsTrait,ParticipantTrait,DropDownListTrait,WhatsappTrait;
     public string $event_id,$departamento = '',$provincia = '',$imagen = '';
     public $distrito;
     public ParticipantsForm $form;
@@ -24,6 +26,7 @@ class QuizWebLive extends Component
             $participant = $this->getParticipantValidateForPhone('email',$this->form->email);
             if ($participant) {
                 $this->setParticipantInEvent($participant,$this->event_id);
+                $this->sendMessageTheWhatsApp($participant->names.' '.$participant->last_name,$participant->email,$participant->phone);
                 $this->submitted = true;
             }
         }
@@ -88,11 +91,18 @@ class QuizWebLive extends Component
         unset($v['provincia']);
         unset($v['distrito']);
 
-        $this->storeParticipant($v['form'], $this->event_id);
-        $messages = '¡Gracias por registrarte!';
-        $this->sendWhatsapp($this->form->phone);
-
+        $participant = $this->storeParticipant($v['form'], $this->event_id);
+        if($participant){
+            $this->sendMessageTheWhatsApp($participant->names.' '.$participant->last_name,$participant->email,$participant->phone);
+        }
 
         $this->submitted = true;
+    }
+    public function sendMessageTheWhatsApp($name,$email,$phone):void
+    {
+        $phone = '51'.$phone;
+        WelcomeWhatsappSender::dispatch( $name,$email,$phone);
+        JoinFormWhatsappSender::dispatch($name,$email,$phone);
+
     }
 }

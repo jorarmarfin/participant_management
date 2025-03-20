@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 trait EventsTrait
 {
-    public function getEvents(): \Illuminate\Database\Eloquent\Builder
+    public function getEvents()
     {
         return Event::orderBy('id', 'desc');
     }
@@ -86,4 +86,6 @@ trait EventsTrait
                 DB::raw('" " as var_4')
             );
     }
+
+
 }

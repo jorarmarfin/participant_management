@@ -2,11 +2,14 @@
 
 namespace App\Console\Commands;
 
-use App\Services\WaveConnectedService;
+use App\Jobs\JoinFormWhatsappSender;
+use App\Jobs\WelcomeWhatsappSender;
+use App\Traits\WhatsappTrait;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command
 {
+    use WhatsappTrait;
     /**
      * The name and signature of the console command.
      *
@@ -26,10 +29,11 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $instance = env('WAVECONNECTED_INSTANCE');
-        $this->info('Instance: '.$instance);
-        $phone = '992949424';
-        $contact = (new WaveConnectedService)->getContactById($instance,$phone);
-        $this->info(json_encode($contact));
+        $name = 'Luis Mayta';
+        $phone = '51992949424';
+        $email = 'luis.mayta@gmail.com';
+//        WelcomeWhatsappSender::dispatch($name,$email,$phone);
+        JoinFormWhatsappSender::dispatch($name,$email,$phone);
+        $this->info('enviado');
     }
 }
