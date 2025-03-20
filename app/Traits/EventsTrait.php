@@ -73,7 +73,6 @@ trait EventsTrait
     {
         return Participant::orderBy('participants.id','asc')
             ->join('event_participant', 'participants.id', '=', 'event_participant.participant_id')
-            ->join('ubigeos as d', 'participants.ubigeo_id', '=', 'd.id')
             ->join('events as e', 'event_participant.event_id', '=', 'e.id')
             ->where('e.id', $event_id)
             ->select(
