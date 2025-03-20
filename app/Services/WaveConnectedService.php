@@ -17,7 +17,7 @@ class WaveConnectedService
         $client = new Client();
         try {
             $options['headers'] = [
-                'Authorization' => 'Bearer ' . env('WAVECONNECTED_API_TOKEN','tjcE4JqHkhUFVHZQC8n3fUSw56AWWWIfc0zdefDjd60e6a7a'),
+                'Authorization' => 'Bearer ' . env('WAVECONNECTED_API_TOKEN','20Fri9rB5rQw3wuEnx7rHLVXXz7Pp8kg93vWwyWj52ebd919'),
                 'accept' => 'application/json',
                 'content-type' => 'application/json',
             ];
