@@ -112,7 +112,7 @@ trait ParticipantTrait
         $search = ($search)?mb_strtoupper($search):null;
         $participants =  Participant::orderBy('participants.id','asc')
             ->select(
-                DB::raw('CONCAT(participants.names, " ", participants.last_name) as name'),
+                DB::raw('CONCAT(COALESCE(participants.names, ""), " ", COALESCE(participants.last_name, "")) as name'),
                 DB::raw('IF(participants.country = "PERÚ", CONCAT("51", participants.phone), participants.phone) as phone'),
                 'participants.email',
                 DB::raw('" " as var_1'),
