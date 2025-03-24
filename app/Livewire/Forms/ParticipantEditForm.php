@@ -14,8 +14,8 @@ class ParticipantEditForm extends Form
     public string $broadcast_list = '';
     public string $names = '';
     public string $last_name = '';
-    public string $email = '';
-    public string $phone = '';
+    public ?string $email = '';
+    public ?string $phone = '';
     public string $country = 'Perú';
     public $ubigeo_id;
     public string $educational_institution_type = '';

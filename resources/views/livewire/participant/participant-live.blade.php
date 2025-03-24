@@ -14,7 +14,7 @@
         </div>
         <div class="grid grid-cols-5 gap-4">
             <div>
-                <label class="font-bold">Estatus</label>
+                <label class="font-bold">Estatus de personas</label>
                 <select
                     wire:model.live="currentStatus"
                     class="form-select">

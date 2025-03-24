@@ -24,8 +24,8 @@
                     <div class="grid grid-cols-5 gap-4 mt-8">
                         <livewire:dashboard.card-attached-live :count="$count_participants" name="Participantes" />
                         <livewire:dashboard.card-attached-live :count="$count_attached" name="Adheridos" />
-                        <livewire:dashboard.card-attached-live :count="$count_new" name="Nuevo (Charla)" />
-                        <livewire:dashboard.card-attached-live :count="$count_new_web" name="Nuevo (web)" />
+                        <livewire:dashboard.card-attached-live :count="$count_new" name="Nuevos (Charla)" />
+                        <livewire:dashboard.card-attached-live :count="$count_new_web" name="Nuevos (web)" />
                         <livewire:dashboard.card-attached-live :count="$count_new_campaigns" name="Campañas" />
                     </div>
                     <div>
