@@ -51,5 +51,6 @@ class ParticipantEditLive extends Component
             $this->distrito = '';
         }
         $this->form->updateParticipant();
+        $this->redirect('/participants');
     }
 }

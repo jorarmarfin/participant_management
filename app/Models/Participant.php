@@ -35,7 +35,7 @@ class Participant extends Model
     protected function phone():Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => str_replace(['(',')',' ','-'],'',$value),
+            set: fn (?string $value) => (is_null($value)) ? null : str_replace(['(',')',' ','-'],'',$value),
         );
     }
     public function ubigeo(): HasOne
