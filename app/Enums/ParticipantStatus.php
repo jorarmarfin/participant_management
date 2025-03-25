@@ -10,6 +10,9 @@ enum ParticipantStatus: string
     case RecurrentChat = 'Recurrente (Charla)';
     case newCampaigns = 'Campañas';
     case invited = 'Invitado a adherirse';
+    case retired = 'Retirado';
+
+
     public static function getAllParticipantStatuses(): array
     {
         return array_column(ParticipantStatus::cases(), 'value');
