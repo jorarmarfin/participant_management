@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Enums\ParticipantStatus;
+use App\Jobs\MyContactWhatsappJob;
 use App\Models\Participant;
 use App\Services\WaveConnectedService;
 use Illuminate\Support\Facades\DB;
@@ -113,6 +114,18 @@ trait ParticipantTrait
             $sw = true;
         }
         return $sw;
+    }
+    public function analyzeIsMyContact(): void
+    {
+        $participants = Participant::where('status', ParticipantStatus::NewWeb->value)
+            ->whereNotNull('phone')
+            ->where('phone', '<>', '')
+            ->get();
+        if ($participants){
+            foreach ($participants as $participant) {
+                MyContactWhatsappJob::dispatch($participant->id, $participant->phone);
+            }
+        }
     }
 
     public function getParticipantsByWhatsapp($currentStatus, $search = null, $notSwitch = 0)
