@@ -85,7 +85,7 @@
                                     class="btn-icon-success">
                                 <i class="far fa-address-book"></i>
                             </button>
-                            <a href="/participants/{{$participant->id}}/edit" class="btn-icon-primary">
+                            <a href="/participants/{{$participant->id}}/edit" target="_blank" class="btn-icon-primary">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
                             <button wire:click="delete({{ $participant->id }})" class="btn-icon-danger">
