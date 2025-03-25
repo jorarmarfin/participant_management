@@ -35,6 +35,7 @@ class ParticipantEditForm extends Form
         $this->country = mb_strtolower($participant->country);
         $this->country = Str::ucfirst($this->country);
         $this->observation = $participant->observation ?? '';
+        $this->status = $participant->status;
     }
     public function updateParticipant()
     {
@@ -49,6 +50,7 @@ class ParticipantEditForm extends Form
             'educational_institution_type' => $this->educational_institution_type,
             'ubigeo_id' => $this->ubigeo_id,
             'observation' => $this->observation,
+            'status' => $this->status,
         ]);
 
     }

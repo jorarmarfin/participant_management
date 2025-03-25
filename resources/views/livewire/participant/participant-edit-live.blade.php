@@ -159,6 +159,17 @@
             @enderror
         </div>
         <div>
+            <label class="font-bold">Estatus de personas</label>
+            <select
+                wire:model.live="form.status"
+                class="form-select">
+                <option value="0">Seleccione</option>
+                @foreach($status as $key => $value)
+                    <option value="{{ $value }}">{{ $value }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
             <label for="observation" class="block text-gray-700 font-medium mb-2">Observaciones</label>
             <textarea id="observation" name="observation" wire:model="form.observation"
                       class="input-textarea"
@@ -169,6 +180,7 @@
             </div>
             @enderror
         </div>
+        <div></div>
 
         <!-- Botón Enviar -->
         <div class="text-center">

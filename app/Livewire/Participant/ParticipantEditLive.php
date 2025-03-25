@@ -23,7 +23,8 @@ class ParticipantEditLive extends Component
             'departamentos' => $this->getDDLDepartamento(),
             'provincias' => $this->getDDLProvincia($this->departamento),
             'distritos' => $this->getDDLDistrito($this->provincia),
-            'types' => $this->DDLInstitutionType()
+            'types' => $this->DDLInstitutionType(),
+            'status'=>$this->DDLStatus(),
 
         ]);
     }
