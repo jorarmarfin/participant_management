@@ -13,7 +13,7 @@ class ParticipantEditForm extends Form
     public string $code_pp = '';
     public string $broadcast_list = '';
     public string $names = '';
-    public string $last_name = '';
+    public ?string $last_name = '';
     public ?string $email = '';
     public ?string $phone = '';
     public string $country = 'Perú';
@@ -29,7 +29,7 @@ class ParticipantEditForm extends Form
         $this->broadcast_list = $participant->broadcast_list ?? '';
         $this->names = $participant->names;
         $this->email = $participant->email;
-        $this->last_name = $participant->last_name;
+        $this->last_name = $participant->last_name ?? '';
         $this->phone = $participant->phone;
         $this->educational_institution_type = $participant->educational_institution_type ?? '';
         $this->country = mb_strtolower($participant->country);
