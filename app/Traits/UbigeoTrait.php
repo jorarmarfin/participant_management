@@ -54,4 +54,10 @@ trait UbigeoTrait
     {
         return ($ubigeo_id) ? Ubigeo::where('id', $ubigeo_id)->first()->toArray() : null;
     }
+    public function getUbigeoIdByDescription($description)
+    {
+        $ubigeo = Ubigeo::where('description', $description)->first();
+        if(!$ubigeo) return null;
+        return $ubigeo->id;
+    }
 }

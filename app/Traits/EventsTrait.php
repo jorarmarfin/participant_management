@@ -85,6 +85,10 @@ trait EventsTrait
                 DB::raw('" " as var_4')
             );
     }
+    public function getEventByField($field, $value)
+    {
+        return Event::where($field, $value)->first();
+    }
 
 
 }
