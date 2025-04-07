@@ -3,15 +3,17 @@
 namespace App\Traits;
 
 use App\Enums\ParticipantStatus;
+use App\Imports\ParticipantsImport;
 use App\Jobs\MyContactWhatsappJob;
 use App\Models\Participant;
 use App\Services\WaveConnectedService;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use function PHPUnit\Framework\isNull;
 
 trait ParticipantTrait
 {
-    public function getParticipants($currentStatus, $search = null, $notSwitch = 0)
+    public function getParticipants($currentStatus, $search = null, $notSwitch = 0, $departament = null, $provincia = null, $distrito = null)
     {
         $search = ($search) ? mb_strtoupper($search) : null;
         $participants = Participant::orderBy('participants.names', 'asc');
@@ -28,6 +30,19 @@ trait ParticipantTrait
             $participants = $this->applyFilter($participants, $notSwitch);
         }
         $participants = $participants->leftjoin('ubigeos as u', 'u.id', '=', 'participants.ubigeo_id');
+
+        if ($departament) {
+            $participants = $participants->where('u.departamento', 'like', '%' . $departament . '%');
+        }
+
+        if ($provincia) {
+            $participants = $participants->where('u.provincia', 'like', '%' . $provincia . '%');
+        }
+
+        if ($distrito) {
+            $participants = $participants->where('u.distrito', 'like', '%' . $distrito . '%');
+        }
+
         $participants = $participants
             ->orderBy('participants.last_name', 'asc')
             ->orderBy('participants.names', 'asc');
@@ -115,20 +130,21 @@ trait ParticipantTrait
         }
         return $sw;
     }
+
     public function analyzeIsMyContact(): void
     {
         $participants = Participant::where('status', ParticipantStatus::NewWeb->value)
             ->whereNotNull('phone')
             ->where('phone', '<>', '')
             ->get();
-        if ($participants){
+        if ($participants) {
             foreach ($participants as $participant) {
                 MyContactWhatsappJob::dispatch($participant->id, $participant->phone);
             }
         }
     }
 
-    public function getParticipantsByWhatsapp($currentStatus, $search = null, $notSwitch = 0)
+    public function getParticipantsByWhatsapp($currentStatus, $search = null, $notSwitch = 0, $departament = null, $provincia = null, $distrito = null)
     {
         $search = ($search) ? mb_strtoupper($search) : null;
         $participants = Participant::orderBy('participants.id', 'asc')
@@ -152,7 +168,29 @@ trait ParticipantTrait
         if ($notSwitch > 0) {
             $participants = $this->applyFilter($participants, $notSwitch);
         }
+
+        $participants = $participants->leftjoin('ubigeos as u', 'u.id', '=', 'participants.ubigeo_id');
+
+        if ($departament) {
+            $participants = $participants->where('u.departamento', 'like', '%' . $departament . '%');
+        }
+
+        if ($provincia) {
+            $participants = $participants->where('u.provincia', 'like', '%' . $provincia . '%');
+        }
+
+        if ($distrito) {
+            $participants = $participants->where('u.distrito', 'like', '%' . $distrito . '%');
+        }
+
+
         return $participants;
+    }
+
+    public function uploadParticipant($file_name)
+    {
+        Excel::import(new ParticipantsImport, $file_name);
+
     }
 
 

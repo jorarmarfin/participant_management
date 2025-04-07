@@ -19,7 +19,9 @@ trait UbigeoTrait
 
     public function getDDLDistrito($provincia)
     {
-        return Ubigeo::where('provincia', $provincia)->select('distrito as name', 'id')->get();
+        return Ubigeo::where('provincia', $provincia)
+            ->whereNotLike('code', '%00')
+            ->select('distrito as name', 'id')->get();
     }
 
     public function getDDLCountries(): array

@@ -1,18 +1,29 @@
 <div>
     <div class="card">
-        <div class="flex flex-1 justify-end">
-            <button
-                wire:click="downLoadFile('PE')"
-                class="btn-success">
-                <i class="fas fa-file-excel"></i>
-            </button>
-            <button
-                wire:click="downLoadFile('WP')"
-                class="btn-success ms-2">
-                <i class="fab fa-whatsapp"></i>
-            </button>
+        <div class="flex justify-between">
+            <div>
+                <input type="file" wire:model="file" class="form-control" />
+                @error('file') <span class="text-danger">{{ $message }}</span> @enderror
+                <button wire:click="uploadFile" wire:loading.attr="disabled" wire:target="uploadFile"
+                    type="button" class="btn-primary">Cargar archivo</button>
+            </div>
+            <div>
+                <button
+                    wire:click="downLoadFile('PE')"
+                    class="btn-success">
+                    <i class="fas fa-file-excel"></i>
+                </button>
+                <button
+                    wire:click="downLoadFile('WP')"
+                    class="btn-success ms-2">
+                    <i class="fab fa-whatsapp"></i>
+                </button>
+            </div>
+
+
         </div>
-        <div class="grid grid-cols-5 gap-4">
+
+        <div class="grid grid-cols-6 gap-4 mt-10">
             <div>
                 <label class="font-bold">Estatus de personas</label>
                 <select
@@ -44,7 +55,36 @@
                     <option value=3>Personas sin teléfono y sin email</option>
                 </select>
             </div>
+            <div>
+                <label class="font-bold">Departamentos</label>
+                <select wire:model.live="departament"  class="form-select">
+                    <option value="0">Seleccione</option>
+                    @foreach($departamentos as $key => $value)
+                        <option value="{{ $value }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label class="font-bold">Provincias</label>
+                <select wire:model.live="provincia"  class="form-select">
+                    <option value="0">Seleccione</option>
+                    @foreach($provincias as $key => $value)
+                        <option value="{{ $value }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label class="font-bold">Distritos</label>
+                <select wire:model.live="distrito"  class="form-select">
+                    <option value="0">Seleccione</option>
+                    @foreach($distritos as $key => $value)
+                        <option value="{{ $value->name }}">{{ $value->name }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
+
+
         <div wire:loading wire:target="search" class="text-center py-4">
             <p class="text-gray-500">Buscando...</p>
         </div>
