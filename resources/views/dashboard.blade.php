@@ -35,6 +35,10 @@
                             <li>Teléfonos no validos: {{$count_phone_not_valid}}</li>
                         </ul>
                     </div>
+                    <div>
+                        <h2 class="mt-8 text-lg text-gray-900 font-bold">Estadística de participantes adheridos </h2>
+                        <livewire:dashboard.card-count-by-ubigeo />
+                    </div>
                 </div>
 
             </div>
