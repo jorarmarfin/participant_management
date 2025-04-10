@@ -32,7 +32,7 @@ trait EventsTrait
     public function getParticipantsByEvent($event_id)
     {
         $event = Event::find($event_id);
-        return Participant::orderBy('id', 'desc')->whereIn('id', $event->participants->pluck('id')->toArray());
+        return Participant::orderBy('created_at', 'desc')->whereIn('id', $event->participants->pluck('id')->toArray());
     }
 
     public function getMessageToSend($fecha): string
