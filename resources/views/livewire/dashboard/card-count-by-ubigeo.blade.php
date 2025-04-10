@@ -30,7 +30,8 @@
                 @if(count($data_distritos)>0)
                     <th class="py-4 pe-4 border-b border-slate-200">Distritos</th>
                 @endif
-                <th class="py-4 pe-4 border-b border-slate-200">Cantidad</th>
+                <th class="py-4 pe-4 border-b border-slate-200">Adheridos</th>
+                <th class="py-4 pe-4 border-b border-slate-200">Firmas</th>
             </tr>
             </thead>
             <tbody>
@@ -39,6 +40,7 @@
                     <tr class="hover:bg-slate-50 border-b border-slate-200">
                         <td class="">{{ $item->departamento }}</td>
                         <td class="text-center">{{ $item->cnt }}</td>
+                        <td class="text-center">{{ $item->cnt_signature }}</td>
                     </tr>
                 @endforeach
             @elseif(count($data_provincias)>0 && count($data_distritos)==0)
@@ -47,6 +49,7 @@
                         <td class="">{{ $p->departamento }}</td>
                         <td class="">{{ $p->provincia }}</td>
                         <td class="text-center">{{ $p->cnt }}</td>
+                        <td class="text-center">{{ $p->cnt_signature }}</td>
                     </tr>
                 @endforeach
             @elseif(count($data_distritos)>0)
@@ -56,6 +59,7 @@
                         <td class="">{{ $d->provincia }}</td>
                         <td class="">{{ $d->distrito }}</td>
                         <td class="text-center">{{ $d->cnt }}</td>
+                        <td class="text-center">{{ $d->cnt_signature }}</td>
                     </tr>
                 @endforeach
             @endif
@@ -76,6 +80,15 @@
                         {{ $total_provincia }}
                     @elseif(count($data_distritos)>0)
                         {{ $total_distrito }}
+                    @endif
+                </td>
+                <td class="border-b border-slate-200 text-center">
+                    @if(count($data_provincias)==0)
+                        {{ $total_data_s }}
+                    @elseif(count($data_provincias)>0 && count($data_distritos)==0)
+                        {{ $total_provincia_s }}
+                    @elseif(count($data_distritos)>0)
+                        {{ $total_distrito_s }}
                     @endif
                 </td>
             </tr>

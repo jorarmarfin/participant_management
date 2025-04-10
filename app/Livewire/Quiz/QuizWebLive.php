@@ -27,7 +27,6 @@ class QuizWebLive extends Component
             $participant = $this->getParticipantValidateForPhone('email',$this->form->email);
             if ($participant) {
                 $this->setParticipantInEvent($participant,$this->event_id);
-                $this->sendMessageTheWhatsApp($participant->names.' '.$participant->last_name,$participant->email,$participant->phone);
                 $this->submitted = true;
             }
         }
