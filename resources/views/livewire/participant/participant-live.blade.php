@@ -6,6 +6,9 @@
                 @error('file') <span class="text-danger">{{ $message }}</span> @enderror
                 <button wire:click="uploadFile" wire:loading.attr="disabled" wire:target="uploadFile"
                     type="button" class="btn-primary">Cargar archivo</button>
+                <a href="{{asset('assets/example.xlsx')}}" target="_blank" type="button" class="btn-primary" download>
+                    <i class="fas fa-file-excel"></i>
+                </a>
             </div>
             <div>
                 <button
