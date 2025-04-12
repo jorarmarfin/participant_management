@@ -21,15 +21,7 @@
 
         <!-- Styles -->
         @livewireStyles
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-76M1D5D814"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
 
-            gtag('config', 'G-76M1D5D814');
-        </script>
     </head>
     <body class="font-sans antialiased">
         <x-banner />
