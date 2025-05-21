@@ -97,6 +97,7 @@
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                    <th>N°</th>
                     <th>Código pp</th>
                     <th>Lista difusión</th>
                     <th>Apellidos</th>
@@ -107,7 +108,7 @@
                     <th>Pais</th>
                     <th>Ubigeo</th>
                     <th>Fecha</th>
-                    <th>Accion</th>
+                    <th>Acción</th>
 
 
                 </tr>
@@ -115,6 +116,7 @@
                 <tbody>
                 @foreach ($participants as $participant)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $participant->code_pp }}</td>
                         <td>{{ $participant->broadcast_list }}</td>
                         <td>{{ $participant->last_name }}</td>
@@ -126,12 +128,17 @@
                         <td>{{ $participant?->ubigeo }}</td>
                         <td>{{ $participant->created_at }}</td>
                         <td class="flex">
+                            <button wire:click="setStatus('{{ $participant->id }}')"
+                                    type="button"
+                                    class="btn-icon-primary">
+                                A
+                            </button>
                             <button wire:click="contact('{{ $participant->id }}','{{ $participant->phone }}')"
                                     type="button"
                                     class="btn-icon-success">
                                 <i class="far fa-address-book"></i>
                             </button>
-                            <a href="/participants/{{$participant->id}}/edit" target="_blank" class="btn-icon-primary">
+                            <a href="/participants/{{$participant->id}}/edit" class="btn-icon-primary">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
                             <button wire:click="delete({{ $participant->id }})" class="btn-icon-danger">

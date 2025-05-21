@@ -214,5 +214,14 @@ trait ParticipantTrait
         Excel::import(new ParticipantsImport, $file_name);
     }
 
+    public function setParticipantStatus($participant_id, $status)
+    {
+        $participant = Participant::find($participant_id);
+        if ($participant) {
+            $participant->status = $status;
+            $participant->save();
+        }
+    }
+
 
 }

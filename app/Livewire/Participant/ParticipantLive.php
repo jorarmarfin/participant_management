@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Participant;
 
+use App\Enums\ParticipantStatus;
 use App\Traits\DropDownListTrait;
 use App\Traits\ParticipantTrait;
 use App\Traits\UbigeoTrait;
@@ -102,5 +103,14 @@ class ParticipantLive extends Component
         $this->uploadParticipant(
             $this->file->store('contacts')
         );
+    }
+    public function setStatus($participant_id)
+    {
+        $this->setParticipantStatus($participant_id,ParticipantStatus::Attached->value);
+//        $this->dispatch('alert',[
+//            'title'=>'Estado',
+//            'icon'=>'success',
+//            'message'=>'Estado actualizado'
+//        ]);
     }
 }
