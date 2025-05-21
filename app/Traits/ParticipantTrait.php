@@ -43,9 +43,11 @@ trait ParticipantTrait
             $participants = $participants->where('u.distrito', 'like', '%' . $distrito . '%');
         }
 
-        $participants = $participants
-            ->orderBy('participants.last_name', 'asc')
-            ->orderBy('participants.names', 'asc');
+        if($notSwitch != 4) {
+            $participants = $participants
+                ->orderBy('participants.last_name', 'asc')
+                ->orderBy('participants.names', 'asc');
+        }
 
         return $participants->select(
             'participants.id',
