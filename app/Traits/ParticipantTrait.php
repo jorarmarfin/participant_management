@@ -70,7 +70,7 @@ trait ParticipantTrait
             1 => $participant->whereNull('participants.phone'),
             2 => $participant->whereNull('participants.email'),
             3 => $participant->whereNull('participants.phone')->whereNull('participants.email'),
-            4 => $participant->orderBy('participants.created_at', 'desc'),
+            4 => $participant->orderByRaw('ISNULL(created_at), created_at DESC'),
             default => $participant,
         };
 
