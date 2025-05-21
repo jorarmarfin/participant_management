@@ -82,5 +82,9 @@ trait DashboardTrait
             ->orderBy('u.distrito', 'asc')
             ->get();
     }
+    public function getCountParticipantsNotUbigeo()
+    {
+        return Participant::whereNull('ubigeo_id')->count();
+    }
 
 }

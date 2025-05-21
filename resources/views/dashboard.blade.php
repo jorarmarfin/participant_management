@@ -14,7 +14,6 @@
                     <h1 class="mt-8 text-2xl font-medium text-gray-900">
                         Bienvenido al sistema de gestión de participantes
                     </h1>
-
                     <p class="mt-6 text-gray-500 leading-relaxed">
                         Sistema diseñado para gestionar de manera eficiente el registro, seguimiento y
                         fidelización de participantes en eventos y campañas organizadas por la plataforma
@@ -33,6 +32,7 @@
                         <ul>
                             <li>Usuarios sin email: {{$count_not_email}}</li>
                             <li>Teléfonos no validos: {{$count_phone_not_valid}}</li>
+                            <li>Adheridos sin ubigeo: {{$count_attached_not_ubigeo}}</li>
                         </ul>
                     </div>
                     <div>

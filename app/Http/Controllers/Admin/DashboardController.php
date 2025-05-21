@@ -21,6 +21,7 @@ class DashboardController extends Controller
             'count_participants' => $this->countParticipants(),
             'count_not_email' => $this->countParticipantsByNotEmail(),
             'count_phone_not_valid' => $this->countParticipantsByPhoneNotValid(),
+            'count_attached_not_ubigeo' => $this->getCountParticipantsNotUbigeo()
         ]);
 
     }
