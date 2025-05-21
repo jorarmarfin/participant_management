@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Enums\ParticipantStatus;
 use App\Models\Participant;
 use Illuminate\Support\Facades\DB;
 
@@ -84,7 +85,7 @@ trait DashboardTrait
     }
     public function getCountParticipantsNotUbigeo()
     {
-        return Participant::whereNull('ubigeo_id')->count();
+        return Participant::where('status',ParticipantStatus::Attached->value)->whereNull('ubigeo_id')->count();
     }
 
 }
