@@ -85,6 +85,7 @@ trait ParticipantTrait
             2 => $query->whereNull('participants.email'),
             3 => $query->whereNull('participants.phone')->whereNull('participants.email'),
             4 => $query->orderByRaw('ISNULL(participants.created_at), participants.created_at DESC'),
+            5 => $query->whereNull('participants.ubigeo_id'),
             default => $query,
         };
     }
