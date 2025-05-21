@@ -41,6 +41,7 @@ trait DashboardTrait
                 DB::raw('COUNT(*) as cnt'),
                 DB::raw('COUNT(signature_id) as cnt_signature'),
                             )
+            ->where('participants.status', 'Adherido')
             ->groupBy('u.departamento')
             ->orderBy('u.departamento', 'asc');
 
@@ -56,6 +57,7 @@ trait DashboardTrait
                 DB::raw('COUNT(signature_id) as cnt_signature'),
             )
             ->where('u.departamento', $departamento)
+            ->where('participants.status', 'Adherido')
             ->groupBy('u.departamento')
             ->groupBy('u.provincia')
             ->orderBy('u.provincia', 'asc')
@@ -73,6 +75,7 @@ trait DashboardTrait
             )
             ->where('u.departamento', $departamento)
             ->where('u.provincia', $provincia)
+            ->where('participants.status', 'Adherido')
             ->groupBy('u.departamento')
             ->groupBy('u.provincia')
             ->groupBy('u.distrito')
