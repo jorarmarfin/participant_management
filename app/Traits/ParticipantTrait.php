@@ -120,15 +120,21 @@ trait ParticipantTrait
 
     public function isMyContact($participant_id, $phone): bool
     {
-        $sw = false;
         $contact = (new WaveConnectedService)->getContactById($phone);
-        if ($contact['data']['data']['isMyContact']) {
+
+        // Validar que la respuesta tenga la estructura esperada
+        $isMyContact = $contact['data']['data']['isMyContact'] ?? false;
+
+        if ($isMyContact) {
             $participant = Participant::find($participant_id);
-            $participant->status = ParticipantStatus::Attached;
-            $participant->save();
-            $sw = true;
+            if ($participant) {
+                $participant->status = ParticipantStatus::Attached;
+                $participant->save();
+            }
+            return true;
         }
-        return $sw;
+
+        return false;
     }
 
     public function analyzeIsMyContact(): void
