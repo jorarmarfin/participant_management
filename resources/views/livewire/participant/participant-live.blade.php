@@ -105,6 +105,7 @@
                     <th>Estatus</th>
                     <th>Pais</th>
                     <th>Ubigeo</th>
+                    <th>Fecha</th>
                     <th>Accion</th>
 
 
@@ -122,6 +123,7 @@
                         <td>{{ $participant->status }}</td>
                         <td>{{ $participant->country }}</td>
                         <td>{{ $participant?->ubigeo }}</td>
+                        <td>{{ $participant->created_at }}</td>
                         <td class="flex">
                             <button wire:click="contact('{{ $participant->id }}','{{ $participant->phone }}')"
                                     type="button"

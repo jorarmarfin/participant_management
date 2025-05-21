@@ -121,7 +121,6 @@ trait ParticipantTrait
     public function isMyContact($participant_id, $phone): bool
     {
         $contact = (new WaveConnectedService)->getContactById($phone);
-
         // Validar que la respuesta tenga la estructura esperada
         $isMyContact = $contact['data']['data']['isMyContact'] ?? false;
 
@@ -196,7 +195,6 @@ trait ParticipantTrait
     public function uploadParticipant($file_name)
     {
         Excel::import(new ParticipantsImport, $file_name);
-
     }
 
 

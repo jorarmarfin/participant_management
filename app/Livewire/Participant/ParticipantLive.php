@@ -9,6 +9,7 @@ use App\Traits\UtilsTrait;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Livewire\Attributes\Validate;
 
 class ParticipantLive extends Component
 {
@@ -16,8 +17,9 @@ class ParticipantLive extends Component
     public string $currentStatus = ' ';
     public string $search = '';
     public int $notSwitch = 0;
-    public $file;
+
     public $departament,$provincia,$distrito;
+    public $file;
 
     public function render()
     {
@@ -83,6 +85,20 @@ class ParticipantLive extends Component
     }
     public function uploadFile()
     {
+        // Verifica si el archivo fue cargado
+        if (!$this->file) {
+            $this->dispatch('alert', [
+                'type' => 'error',
+                'message' => 'Por favor, selecciona un archivo antes de subirlo.'
+            ]);
+            return;
+        }
+
+        // Valida el archivo
+        $this->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+
         $this->uploadParticipant(
             $this->file->store('contacts')
         );
