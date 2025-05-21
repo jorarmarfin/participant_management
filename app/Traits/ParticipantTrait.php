@@ -15,40 +15,53 @@ trait ParticipantTrait
 {
     public function getParticipants($currentStatus, $search = null, $notSwitch = 0, $departament = null, $provincia = null, $distrito = null)
     {
-        $search = ($search) ? mb_strtoupper($search) : null;
-        $participants = Participant::orderBy('participants.names', 'asc');
-        if ($currentStatus != ' ') {
+        $search = $search ? mb_strtoupper($search) : null;
+
+        $participants = Participant::query();
+
+        // Filtro por estado
+        if (trim($currentStatus) !== '') {
             $participants->where('participants.status', $currentStatus);
         }
+
+        // Búsqueda por nombres, apellidos, teléfono o código
         if ($search) {
-            $participants->where('participants.names', 'like', '%' . $search . '%')
-                ->orWhere('participants.last_name', 'like', '%' . $search . '%')
-                ->orWhere('participants.phone', 'like', '%' . $search . '%')
-                ->orWhere('participants.code_pp', 'like', '%' . $search . '%');
+            $participants->where(function ($query) use ($search) {
+                $query->where('participants.names', 'like', '%' . $search . '%')
+                    ->orWhere('participants.last_name', 'like', '%' . $search . '%')
+                    ->orWhere('participants.phone', 'like', '%' . $search . '%')
+                    ->orWhere('participants.code_pp', 'like', '%' . $search . '%');
+            });
         }
+
+        // Filtros especiales: teléfono, email o fecha nula
         if ($notSwitch > 0) {
             $participants = $this->applyFilter($participants, $notSwitch);
         }
-        $participants = $participants->leftjoin('ubigeos as u', 'u.id', '=', 'participants.ubigeo_id');
 
+        // Join con tabla de ubigeos
+        $participants->leftJoin('ubigeos as u', 'u.id', '=', 'participants.ubigeo_id');
+
+        // Filtro por ubigeo
         if ($departament) {
-            $participants = $participants->where('u.departamento', 'like', '%' . $departament . '%');
+            $participants->where('u.departamento', 'like', '%' . $departament . '%');
         }
 
         if ($provincia) {
-            $participants = $participants->where('u.provincia', 'like', '%' . $provincia . '%');
+            $participants->where('u.provincia', 'like', '%' . $provincia . '%');
         }
 
         if ($distrito) {
-            $participants = $participants->where('u.distrito', 'like', '%' . $distrito . '%');
+            $participants->where('u.distrito', 'like', '%' . $distrito . '%');
         }
 
-        if($notSwitch != 4) {
-            $participants = $participants
-                ->orderBy('participants.last_name', 'asc')
+        // Ordenamiento final
+        if ((int)$notSwitch !== 4) {
+            $participants->orderBy('participants.last_name', 'asc')
                 ->orderBy('participants.names', 'asc');
         }
 
+        // Campos a seleccionar
         return $participants->select(
             'participants.id',
             'participants.code_pp',
@@ -64,17 +77,18 @@ trait ParticipantTrait
         );
     }
 
-    public function applyFilter($participant, $filter)
-    {
-        return match ($filter) {
-            1 => $participant->whereNull('participants.phone'),
-            2 => $participant->whereNull('participants.email'),
-            3 => $participant->whereNull('participants.phone')->whereNull('participants.email'),
-            4 => $participant->orderByRaw('ISNULL(created_at), created_at DESC'),
-            default => $participant,
-        };
 
+    public function applyFilter($query, $filter)
+    {
+        return match ((int)$filter) {
+            1 => $query->whereNull('participants.phone'),
+            2 => $query->whereNull('participants.email'),
+            3 => $query->whereNull('participants.phone')->whereNull('participants.email'),
+            4 => $query->orderByRaw('ISNULL(participants.created_at), participants.created_at DESC'),
+            default => $query,
+        };
     }
+
 
     public function getParticipant($participant_id)
     {
