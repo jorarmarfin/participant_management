@@ -13,12 +13,12 @@
             <div>
                 <button
                     wire:click="downLoadFile('PE')"
-                    class="btn-success">
+                    class="btn-success">Descargar
                     <i class="fas fa-file-excel"></i>
                 </button>
                 <button
                     wire:click="downLoadFile('WP')"
-                    class="btn-success ms-2">
+                    class="btn-success ms-2">Descargar
                     <i class="fab fa-whatsapp"></i>
                 </button>
             </div>
