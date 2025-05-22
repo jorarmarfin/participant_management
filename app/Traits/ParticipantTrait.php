@@ -226,5 +226,15 @@ trait ParticipantTrait
         }
     }
 
+    public function deleteParticipant($participant_id)
+    {
+        $participant = Participant::find($participant_id);
+        if ($participant) {
+            $participant->delete();
+            return true;
+        }
+        return false;
+    }
+
 
 }

@@ -130,10 +130,11 @@
                         <td>{{ $participant?->ubigeo }}</td>
                         <td>{{ $participant->created_at }}</td>
                         <td class="flex">
-                            <button wire:click="setStatus('{{ $participant->id }}')"
-                                    type="button"
-                                    class="btn-icon-primary">
-                                A
+                            <button
+                                @click="$dispatch('alertStatus', { id: '{{$participant->id}}', status: {{ json_encode($status) }} })"
+                                type="button"
+                                class="btn-icon-primary">
+                                <i class="fas fa-sliders-h"></i>
                             </button>
                             <button wire:click="contact('{{ $participant->id }}','{{ $participant->phone }}')"
                                     type="button"
@@ -143,7 +144,7 @@
                             <a href="/participants/{{$participant->id}}/edit" class="btn-icon-primary">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
-                            <button wire:click="delete({{ $participant->id }})" class="btn-icon-danger">
+                            <button @click="$dispatch('alerteDelete','{{$participant->id}}')" class="btn-icon-danger">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </td>
@@ -160,12 +161,51 @@
 @script
 <script>
     $wire.on('alert', (data) => {
-        const swa = data[0];
         Swal.fire({
             title: swa.title,
             text: swa.message,
             icon: swa.icon,
             confirmButtonText: 'Aceptar'
+        });
+    });
+    $wire.on('alerteDelete', (data) => {
+        console.log(data);
+        Swal.fire({
+            title: '¿Está seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminarlo!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $wire.delete(data);
+            }
+        });
+    });
+    $wire.on('alertStatus', ({id, status}) => {
+        // Si status es un array simple, lo convertimos a objeto { texto: texto }
+        if (Array.isArray(status)) {
+            status = Object.fromEntries(status.map(s => [s, s]));
+        }
+        Swal.fire({
+            title: 'Selecciona un estatus',
+            input: 'select',
+            inputOptions: status,
+            inputPlaceholder: 'Selecciona un estatus',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Debes seleccionar un estatus';
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed && result.value) {
+                $wire.setStatus(id, result.value);
+            }
         });
     });
 </script>

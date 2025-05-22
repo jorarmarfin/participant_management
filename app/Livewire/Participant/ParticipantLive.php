@@ -104,13 +104,29 @@ class ParticipantLive extends Component
             $this->file->store('contacts')
         );
     }
-    public function setStatus($participant_id)
+    public function setStatus($participant_id,$status)
     {
-        $this->setParticipantStatus($participant_id,ParticipantStatus::Attached->value);
+        $this->setParticipantStatus($participant_id,$status);
 //        $this->dispatch('alert',[
 //            'title'=>'Estado',
 //            'icon'=>'success',
 //            'message'=>'Estado actualizado'
 //        ]);
+    }
+    public function delete($participant_id)
+    {
+        if($this->deleteParticipant($participant_id)){
+            $this->dispatch('alert',[
+                'title'=>'Eliminar',
+                'icon'=>'success',
+                'message'=>'Eliminado correctamente'
+            ]);
+        }else{
+            $this->dispatch('alert',[
+                'title'=>'Eliminar',
+                'icon'=>'error',
+                'message'=>'Error al eliminar'
+            ]);
+        }
     }
 }
