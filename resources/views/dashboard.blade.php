@@ -26,6 +26,10 @@
                         <livewire:dashboard.card-attached-live :count="$count_new" name="Nuevos (Charla)" />
                         <livewire:dashboard.card-attached-live :count="$count_new_web" name="Nuevos (web)" />
                         <livewire:dashboard.card-attached-live :count="$count_new_campaigns" name="Campañas" />
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                         <livewire:dashboard.card-attached-live :count="$count_invited" name="Invitados" />
                     </div>
                     <div>
