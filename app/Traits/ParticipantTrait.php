@@ -86,6 +86,8 @@ trait ParticipantTrait
             3 => $query->whereNull('participants.phone')->whereNull('participants.email'),
             4 => $query->orderByRaw('ISNULL(participants.created_at), participants.created_at DESC'),
             5 => $query->whereNull('participants.ubigeo_id'),
+            6 => $query->whereRaw("participants.phone NOT REGEXP '^9[0-9]{8}$'"),
+
             default => $query,
         };
     }

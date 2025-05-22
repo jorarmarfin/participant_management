@@ -54,6 +54,7 @@
                     class="form-select">
                     <option value="0">Seleccione</option>
                     <option value=1>Personas sin teléfonos</option>
+                    <option value=6>Personas con teléfonos mal formateado</option>
                     <option value=2>Personas sin email</option>
                     <option value=3>Personas sin teléfono y sin email</option>
                     <option value=5>Personas sin ubigeo</option>
