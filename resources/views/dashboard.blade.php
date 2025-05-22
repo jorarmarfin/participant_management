@@ -26,6 +26,7 @@
                         <livewire:dashboard.card-attached-live :count="$count_new" name="Nuevos (Charla)" />
                         <livewire:dashboard.card-attached-live :count="$count_new_web" name="Nuevos (web)" />
                         <livewire:dashboard.card-attached-live :count="$count_new_campaigns" name="Campañas" />
+                        <livewire:dashboard.card-attached-live :count="$count_invited" name="Invitados" />
                     </div>
                     <div>
                         <h2 class="mt-8 text-lg font-medium text-gray-900">Descripción de datos</h2>
