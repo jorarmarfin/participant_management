@@ -31,8 +31,22 @@ trait EventsTrait
 
     public function getParticipantsByEvent($event_id)
     {
-        $event = Event::find($event_id);
-        return Participant::orderBy('created_at', 'desc')->whereIn('id', $event->participants->pluck('id')->toArray());
+        return Participant::orderBy('participants.id', 'asc')
+            ->join('event_participant', 'participants.id', '=', 'event_participant.participant_id')
+            ->join('ubigeos as u', 'participants.ubigeo_id', '=', 'u.id')
+            ->join('events as e', 'event_participant.event_id', '=', 'e.id')
+            ->where('e.id', $event_id)
+            ->select('participants.id',
+                'participants.code_pp',
+                'participants.broadcast_list',
+                'participants.names',
+                'participants.last_name',
+                'participants.phone',
+                'participants.email',
+                'participants.status',
+                'event_participant.event_date',
+                'u.description as ubigeo',
+            );
     }
 
     public function getMessageToSend($fecha): string

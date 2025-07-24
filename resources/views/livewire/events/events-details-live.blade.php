@@ -33,8 +33,8 @@
                         <td>{{ $participant->phone }}</td>
                         <td>{{ $participant->email }}</td>
                         <td>{{ $participant->status }}</td>
-                        <td>{{ $participant->created_at }}</td>
-                        <td>{{ $participant?->ubigeo?->description }}</td>
+                        <td>{{ $participant->event_date ?? '' }}</td>
+                        <td>{{ $participant?->ubigeo }}</td>
                         <td>
                             <x-primary-button wire:click="contact('{{ $participant->id }}','{{$participant->phone}}')" class="btn btn-primary">C</x-primary-button>
                         </td>
