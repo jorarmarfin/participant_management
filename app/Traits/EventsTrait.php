@@ -31,7 +31,7 @@ trait EventsTrait
 
     public function getParticipantsByEvent($event_id)
     {
-        return Participant::orderBy('participants.id', 'asc')
+        return Participant::orderBy('event_participant.event_date', 'desc')
             ->join('event_participant', 'participants.id', '=', 'event_participant.participant_id')
             ->join('ubigeos as u', 'participants.ubigeo_id', '=', 'u.id')
             ->join('events as e', 'event_participant.event_id', '=', 'e.id')
