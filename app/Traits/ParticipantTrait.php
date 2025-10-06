@@ -101,6 +101,11 @@ trait ParticipantTrait
 
     public function storeParticipant($data, $event_id)
     {
+        $existe = Participant::where('email', $data['email'])->first();
+        if ($existe) {
+            return null;
+        }
+
         $participant = Participant::create($data);
         if ($participant) {
             $participant->events()->attach($event_id);
